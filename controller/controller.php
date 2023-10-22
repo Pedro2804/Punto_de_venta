@@ -1,0 +1,23 @@
+<?php
+
+    //$_REQUEST[]; puede ser _POST o _GET
+    //print_r() verifica lo que se imprime
+    require("../function/functions.php");
+
+    $option = isset($_POST["option"]) ? $_POST["option"] : '';
+
+    switch ($option) {
+        case 'login':
+            $result = login();
+            if($result == 1){
+                echo json_encode($result);
+            }else{
+                echo json_encode($result);
+            }
+            break;
+        default:
+            echo json_encode("Select a option valid");
+            break;
+    }
+    $conn = null;
+?>
