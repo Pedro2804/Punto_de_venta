@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrador</title>
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="css/sweetalert2.min.css">
-    <script src="js/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="css/css_bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="img/Elementos/favicon.ico" type="image/x-icon">
@@ -53,47 +53,83 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-11">
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Activo</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Enlace</a>
-                            </li>
-                        </ul>
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Mostrar</button>
+                                    <button class="nav-link disabled" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Nuevo/Modificar</button>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <table id="miTabla" class="display">
+                                        <thead>
+                                            <tr>
+                                                <th>Usuario</th>
+                                                <th>Nombre</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>cipher</td>
+                                                <td>Pedro</td>
+                                                <td>
+                                                    <img src="img/Elementos/edit.svg" title="Editar" width="35" class="d-inline-block align-text-top">
+                                                    <img src="img/Elementos/delete.svg" title="Eliminar" width="35" class="d-inline-block align-text-top">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>close</td>
+                                                <td>Pablo</td>
+                                                <td>
+                                                    <img src="img/Elementos/edit.svg" title="Editar" width="35" class="d-inline-block align-text-top">
+                                                    <img src="img/Elementos/delete.svg" title="Eliminar" width="35" class="d-inline-block align-text-top">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade disabled" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                    <form id="milogin" method="">
+                                        <input type="hidden" id="option" name="option" value="login"/>
+                                        <div class="mb-3 input-group">
+                                            <img src="img/elementos/person.svg" class="input-group-text">
+                                            <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" autofocus required/>
+                                        </div>
+                                        <div class=" mb-3 input-group">
+                                            <img src="img/elementos/lock.svg" class="input-group-text">
+                                            <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña" required/>
+                                        </div>
+                                        <div class="d-grid gap-2 col-6 mx-auto">
+                                            <button type="button" class="btn btn-outline-dark" id="iniciarS">Iniciar sesión</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-1">
-                            <nav class="navbar d-flex justify-content-end bg-light">
+                        <div class="col-1 d-flex justify-content-center align-items-center">
+                            <nav class="navbar d-flex justify-content-end">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <button type="button" class="nav-link border-0 bg-white">
-                                            <img src="img/Elementos/plus.svg" width="65px" class="d-inline-block align-text-top">
+                                        <button type="button" id="agregar" class="nav-link active border-0 bg-white">
+                                            <img src="img/Elementos/plus.svg" width="65px" title="Agregar usuario" class="d-inline-block align-text-top">
                                         </button>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="nav-link border-0">
-                                            <img src="img/Elementos/save.svg" width="65px" class="d-inline-block align-text-top">
+                                        <button class="nav-link border-0 bg-white">
+                                            <img src="img/Elementos/save.svg" width="65px" title="Guagar" class="d-inline-block align-text-top">
                                         </button>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="nav-link border-0">
-                                            <img src="img/Elementos/edit.svg" width="65px" class="d-inline-block align-text-top">
+                                        <button class="nav-link border-0 bg-white">
+                                            <img src="img/Elementos/cancel.svg" width="65px" id="cancelar" title="Cancelar" class="d-inline-block align-text-top">
                                         </button>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="nav-link border-0">
-                                            <img src="img/Elementos/delete.svg" width="65px" class="d-inline-block align-text-top">
+                                        <button type="button" id="salir" class="nav-link border-0 bg-white">
+                                            <img src="img/Elementos/logout.svg" width="65px" title="Salir" class="d-inline-block align-text-top">
                                         </button>
                                     </li>
-                                    <li class="nav-item">
-                                        <button class="nav-link border-0">
-                                            <img src="img/Elementos/cancel.svg" width="60px" class="d-inline-block align-text-top">
-                                        </button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="nav-link border-0">
-                                            <img src="img/Elementos/logout.svg" width="65px" class="d-inline-block align-text-top">
-                                        </button>
                                 </ul>
                             </nav>
                         </div>
@@ -107,6 +143,8 @@
 
     <script src="js/js_bootstrap.bundle.min.js"></script>
     <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script src="js/jquery.dataTables.min.js" charset="utf8"></script>
     <script src="js/empleado.js"></script>
     
 </body>
