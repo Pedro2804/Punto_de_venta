@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("#modal-empl").modal("show");
+    //$("#modal-empl").modal("show");
     $("#empleados").click(function() {
         $("#modal-empl").modal("show");
         iniciar_datatable();
@@ -60,11 +60,11 @@ $(document).ready(function(){
 });
 
 function iniciar_datatable() {
-    $("#miTabla").DataTable({
-        //"lengthMenu": [5, 10, 15, 20], // Personaliza las opciones de longitud de página
-        "scrollY": "300px",
-        "scrollCollapse": true,
-        "paging": false, // Desactiva la paginación
+    $("#Tabla_empl").DataTable({
+        "lengthMenu": [6, 12, 24, 48], // Personaliza las opciones de longitud de página
+        //"scrollY": "325px",
+        //"scrollCollapse": false,
+        //"paging": false, // Desactiva la paginación
         "language": {
             "url": "js/es-ES.json"
           }

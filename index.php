@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="css/sweetalert2.min.css">
-    <script src="js/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="css/css_bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="img/Elementos/favicon.ico" type="image/x-icon">
@@ -33,6 +32,7 @@
     </div>    
 
     <script src="js/js_bootstrap.bundle.min.js"></script>
+    <script src="js/sweetalert2.all.min.js"></script>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/main.js"></script>
 </body>

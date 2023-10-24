@@ -34,7 +34,7 @@ function validar() {
                             })
                         },
                     1 : function(){
-                            window.location.href = 'adm.php';
+                            window.location.href = 'sistema.php';
                             /*Swal.fire({
                                 icon: 'question',
                                 title: '¿Cómo desea acceder?',
@@ -63,9 +63,9 @@ function validar() {
                             })
                         }
                 }
-                results[res]();
                 $("#milogin").trigger("reset");
                 $("#usuario").focus();
+                results[res]();
             }
         });
     }
