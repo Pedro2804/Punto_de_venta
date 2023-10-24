@@ -21,48 +21,39 @@ $(document).ready(function(){
         alert("ventas");
     });
 
-    $("#agregar").click(function() {
-        $("#nav-home-tab").removeClass("active");
-        $("#nav-home-tab").addClass("disabled");
-        $("#nav-profile-tab").removeClass("disabled");
-        $("#nav-profile-tab").addClass("active");
-        $("#nav-home").removeClass("show active");
-        $("#nav-home").addClass("disabled");
-        $("#nav-profile").removeClass("disabled");
-        $("#nav-profile").addClass("show active");
-        $("#miTabla").DataTable().destroy();
-    });
+    $("#telefono").on('input', function() {
+        var input = $(this);
+        var valor = input.val();
+    
+        // Quitar cualquier caracter no numérico, como espacios o guiones
+        valor = valor.replace(/[^0-9]/g, '');
+    
+        // Formatear el número de teléfono, por ejemplo, (123) 456-7890
+        if (valor.length === 10) {
+          valor = '(' + valor.substr(0, 3) + ') ' + valor.substr(3, 3) + '-' + valor.substr(6, 4);
+        }
+    
+        input.val(valor);
+      });
 
-    $("#cancelar").click(function() {
-        $("#nav-home-tab").removeClass("disabled");
-        $("#nav-home-tab").addClass("active");
+    // INICIO BOTONES DEL MODAL "EMPLEADOS"
+    $("#btn_cerrar").click(function() {
+        $("#Tabla_empl").DataTable().destroy();
         $("#nav-profile-tab").removeClass("active");
-        $("#nav-profile-tab").addClass("disabled");
-        $("#nav-home").removeClass("disabled");
-        $("#nav-home").addClass("show active");
         $("#nav-profile").removeClass("show active");
         $("#nav-profile").addClass("disabled");
-        iniciar_datatable();
-    });
-
-    $("#salir").click(function() {
-        $("#nav-home-tab").removeClass("disabled");
         $("#nav-home-tab").addClass("active");
-        $("#nav-profile-tab").removeClass("active");
-        $("#nav-profile-tab").addClass("disabled");
         $("#nav-home").removeClass("disabled");
         $("#nav-home").addClass("show active");
-        $("#nav-profile").removeClass("show active");
-        $("#nav-profile").addClass("disabled");
-        $("#modal-empl").modal("hide");
-        $("#miTabla").DataTable().destroy();
     });
+    // FIN
+
 });
 
 function iniciar_datatable() {
     $("#Tabla_empl").DataTable({
-        "lengthMenu": [6, 12, 24, 48], // Personaliza las opciones de longitud de página
-        //"scrollY": "325px",
+        "lengthMenu": [7], // Personaliza las opciones de longitud de página
+        //"scrollY": "300px",
         //"scrollCollapse": false,
         //"paging": false, // Desactiva la paginación
         "language": {

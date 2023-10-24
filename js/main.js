@@ -63,9 +63,9 @@ function validar() {
                             })
                         }
                 }
+                results[res]();
                 $("#milogin").trigger("reset");
                 $("#usuario").focus();
-                results[res]();
             }
         });
     }
