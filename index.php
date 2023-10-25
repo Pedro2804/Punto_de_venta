@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php session_start() ?>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +7,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="css/sweetalert2.min.css">
     <link rel="stylesheet" href="css/css_bootstrap.min.css">
+    <link rel="preload" href="css/styles.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="img/Elementos/favicon.ico" type="image/x-icon">
 </head>
@@ -23,10 +25,10 @@
             </div>
             <div class=" mb-3 input-group">
                 <img src="img/elementos/lock.svg" class="input-group-text">
-                <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña" required/>
+                <input type="password" class="form-control contraseña" id="passwd" name="passwd" placeholder="Contraseña" required/>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="button" class="btn btn-outline-dark" id="iniciarS">Iniciar sesión</button>
+                <button type="button" class="btn btn-outline-dark boton" id="iniciarS">Iniciar sesión</button>
             </div>
         </form>
     </div>    

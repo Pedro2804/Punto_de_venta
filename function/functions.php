@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
     include("../config/conexion.php");
 
     function login(){
@@ -20,6 +20,7 @@
             return 2;
         }
 
+        $_SESSION["Administrador"] = $row['id_usuario'];
         $pdo->disconected();
         return 1;
     }

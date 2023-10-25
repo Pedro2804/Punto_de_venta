@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="staticBackdropLabel">EMPLEADOS</h5>
                 <button type="button" class="btn-close btn-danger" id="btn_cerrar" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="padding: 0px !important;" >
+            <div class="modal-body " style="padding: 10px !important;" >
                 <nav class="navbar">
                     <div class="nav nav-tabs " id="nav-tab" role="tablist">
                         <button class="nav-link text-black active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
@@ -47,11 +47,21 @@
                                         <img src="img/Elementos/delete.svg" title="Eliminar" width="30" class="d-inline-block align-text-top">
                                     </td>
                                 </tr>
+
+                                <tr>
+                                    <td>Vianney</td>
+                                    <td>Pedro</td>
+                                    <td>Zoyoquila</td>
+                                    <td>
+                                        <img src="img/Elementos/edit.svg" title="Editar" width="30" class="d-inline-block align-text-top">
+                                        <img src="img/Elementos/delete.svg" title="Eliminar" width="30" class="d-inline-block align-text-top">
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="tab-pane fade disabled" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <form class="row g-4 m-3">
+                        <form class="row g-4">
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">N</span>

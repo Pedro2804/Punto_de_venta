@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php  session_start();
+    if(!isset($_SESSION["Administrador"]))
+        header("Location: index.php");
+?>
 <html lang="es">
 <head>
     <meta charset="UTF-8">

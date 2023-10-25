@@ -5,6 +5,10 @@ $(document).ready(function(){
         iniciar_datatable();
     });
 
+    $(document).keydown(function(e) {
+        console.log(e.key);
+    });
+
     $("#inventario").click(function() {
         alert("inv");
     });
