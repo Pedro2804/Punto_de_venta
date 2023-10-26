@@ -1,21 +1,23 @@
-$(document).ready(function(){
-    $("#usuario").keypress(function(e) {
-        (e.which == 13) ? validar() : "";
-    });
+const user = document.getElementById("usuario");
+const passwd = document.getElementById("passwd");
+const btn_iniciar = document.getElementById("iniciarS");
 
-    $("#passwd").keypress(function(e) {
-        (e.which == 13) ? validar() : "";
-    });
+user.addEventListener('keypress', function (e) {
+    (e.charCode == 13) ? validar() : "";
+});
 
-    $("#iniciarS").click(function () {
-        validar();
-    });
+passwd.addEventListener('keypress', function(e) {
+    (e.charCode == 13) ? validar() : "";
+});
+
+btn_iniciar.addEventListener("click", function() {
+    validar();
 });
 
 function validar() {
-    if($("#usuario").val() == "" || $("#passwd").val() == ""){
-        $("#passwd")[0].reportValidity();
-        $("#usuario")[0].reportValidity();
+    if(user.value == "" || passwd.value == ""){
+        passwd.reportValidity();
+        user.reportValidity();
     }else{
         $.ajax({
             type: "POST",
@@ -65,7 +67,7 @@ function validar() {
                 }
                 results[res]();
                 $("#milogin").trigger("reset");
-                $("#usuario").focus();
+                user.focus();
             }
         });
     }

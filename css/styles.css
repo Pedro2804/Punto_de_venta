@@ -1,14 +1,19 @@
 /* Globales */
-body{
+/*body{
     box-sizing: border-box;
     font-size: 62.5%;
 }
 
 *, *:before, *:after{
     box-sizing: inherit;
+}*/
+
+#body_login{
+    background: #ff6600;
+    /*background: linear-gradient(45deg, #ff6600 0%, #F79452 54%, #F7C652 82%);*/
 }
 
 .boton:hover{
-    background-color: orange;
+    background-color: #ff6600;
     border: none;
 }

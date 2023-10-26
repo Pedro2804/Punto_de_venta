@@ -1,10 +1,9 @@
 <?php
-
     //$_REQUEST[]; puede ser _POST o _GET
     //print_r() verifica lo que se imprime
     require("../function/functions.php");
 
-    $option = isset($_POST["option"]) ? $_POST["option"] : '';
+    $option = isset($_REQUEST["option"]) ? $_REQUEST["option"] : '';
 
     switch ($option) {
         case 'login':
@@ -14,6 +13,15 @@
             }else{
                 echo json_encode($result);
             }
+            break;
+        case 'logout':
+            session_destroy();
+            header('Location: ../');
+            break;
+        case 'show_user':
+            $result = show_user();
+
+            echo json_encode($result);
             break;
         default:
             echo json_encode("Select a option valid");

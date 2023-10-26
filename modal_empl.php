@@ -3,8 +3,8 @@
     <div class="modal-dialog modal-xl" style="user-select: none;" >
         <div class="modal-content" style="max-height: 600px;">
             <div class="modal-header text-white" style="background: #808080;" >
-                <h5 class="modal-title" id="staticBackdropLabel">EMPLEADOS</h5>
-                <button type="button" class="btn-close btn-danger" id="btn_cerrar" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="staticBackdropLabel">USUARIOS</h5>
+                <button type="button" class="btn-close btn-danger" onclick="cerrar_modal_empl()" id="btn_cerrar" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body " style="padding: 10px !important;" >
                 <nav class="navbar">
@@ -24,48 +24,20 @@
                                 <tr>
                                     <th>Usuario</th>
                                     <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Acciones</th>
+                                    <th>Telefono</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>cipher</td>
-                                    <td>Pedro</td>
-                                    <td>Zoyoquila</td>
-                                    <td>
-                                        <img src="img/Elementos/edit.svg" title="Editar" width="30" class="d-inline-block align-text-top">
-                                        <img src="img/Elementos/delete.svg" title="Eliminar" width="30" class="d-inline-block align-text-top">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>cipher</td>
-                                    <td>Pedro</td>
-                                    <td>Zoyoquila</td>
-                                    <td>
-                                        <img src="img/Elementos/edit.svg" title="Editar" width="30" class="d-inline-block align-text-top">
-                                        <img src="img/Elementos/delete.svg" title="Eliminar" width="30" class="d-inline-block align-text-top">
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>Vianney</td>
-                                    <td>Pedro</td>
-                                    <td>Zoyoquila</td>
-                                    <td>
-                                        <img src="img/Elementos/edit.svg" title="Editar" width="30" class="d-inline-block align-text-top">
-                                        <img src="img/Elementos/delete.svg" title="Eliminar" width="30" class="d-inline-block align-text-top">
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                     <div class="tab-pane fade disabled" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <form class="row g-4">
+                        <form class="row g-4" id="nuevo_empl">
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">N</span>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" autofocus required/>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required/>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -134,14 +106,14 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="ventas">
-                                    <label class="form-check-label" for="ventas">Ventas</label>
+                                    <input class="form-check-input" type="checkbox" role="switch" id="vent" name="vent">
+                                    <label class="form-check-label" for="vent">Ventas</label>
                                 </div>
                             </div>
 
                             <div class="col-12 gap-2 d-flex justify-content-center">
-                                <button type="button" class="btn btn-outline-dark" id="iniciarS">Guardar</button>
-                                <button type="button" class="btn btn-outline-danger" id="ini">Cancelar</button>
+                                <button type="button" class="btn btn-outline-dark" id="guardar_empl">Guardar</button>
+                                <button type="button" onclick="cancelar_empl()" class="btn btn-outline-danger" id="ini">Cancelar</button>
                             </div>
                         </form>                               
                     </div>

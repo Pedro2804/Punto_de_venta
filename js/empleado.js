@@ -1,12 +1,17 @@
+const btn_empleados = document.getElementById("empleados");
+const form_empl = document.getElementById("nuevo_empl");
+
 $(document).ready(function(){
-    //$("#modal-empl").modal("show");
-    $("#empleados").click(function() {
+    llenar_tabla_empl()
+
+    btn_empleados.addEventListener("click", function() {
         $("#modal-empl").modal("show");
         iniciar_datatable();
     });
 
-    $(document).keydown(function(e) {
-        console.log(e.key);
+    form_empl.addEventListener("submit", function (event) {
+        event.preventDefault();
+        alert("enviar");
     });
 
     $("#inventario").click(function() {
@@ -39,19 +44,6 @@ $(document).ready(function(){
     
         input.val(valor);
       });
-
-    // INICIO BOTONES DEL MODAL "EMPLEADOS"
-    $("#btn_cerrar").click(function() {
-        $("#Tabla_empl").DataTable().destroy();
-        $("#nav-profile-tab").removeClass("active");
-        $("#nav-profile").removeClass("show active");
-        $("#nav-profile").addClass("disabled");
-        $("#nav-home-tab").addClass("active");
-        $("#nav-home").removeClass("disabled");
-        $("#nav-home").addClass("show active");
-    });
-    // FIN
-
 });
 
 function iniciar_datatable() {
@@ -60,8 +52,59 @@ function iniciar_datatable() {
         //"scrollY": "300px",
         //"scrollCollapse": false,
         //"paging": false, // Desactiva la paginación
+        "responsive" : true,
         "language": {
             "url": "js/es-ES.json"
           }
     });
+}
+
+function llenar_tabla_empl() {
+    $.ajax({
+        type: "POST",
+        url: "controller/controller.php",
+        data: {option: "show_user"},
+        cache: false,
+        success: function(result) {
+            var datas = JSON.parse(result);
+            var cuerpoTabla = document.querySelector("#Tabla_empl tbody");
+
+            datas["usuario"].forEach(element => {
+                var fila = document.createElement("tr");
+                var index = ["Usuario", "Nombre", "Telefono", "Editar", "Eliminar"];
+
+                index.forEach(e => {
+                    let celda = document.createElement("td");
+                    if(e !== "Editar" && e !== "Eliminar"){
+                        celda.textContent = element[e];
+                    }else{
+                        celda.innerHTML =  element[e];
+                    }
+                    fila.appendChild(celda);
+                });
+
+                cuerpoTabla.appendChild(fila)
+            });
+            
+        }
+    });
+}
+
+function cancelar_empl() {
+    reiniciar_pad_empl();
+    $("#nuevo_empl").trigger("reset");
+}
+
+function cerrar_modal_empl() {
+    $("#Tabla_empl").DataTable().destroy();
+    reiniciar_pad_empl();
+}
+
+function reiniciar_pad_empl() {
+    $("#nav-profile-tab").removeClass("active");
+    $("#nav-profile").removeClass("show active");
+    $("#nav-profile").addClass("disabled");
+    $("#nav-home-tab").addClass("active");
+    $("#nav-home").removeClass("disabled");
+    $("#nav-home").addClass("show active");
 }
