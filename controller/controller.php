@@ -20,9 +20,14 @@
             break;
         case 'show_user':
             $result = show_user();
-
             echo json_encode($result);
             break;
+        case 'show':
+                $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : '';
+                $result = show($id);
+                echo json_encode($result);
+                break;
+
         default:
             echo json_encode("Select a option valid");
             break;

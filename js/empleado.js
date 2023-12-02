@@ -1,5 +1,6 @@
 const btn_empleados = document.getElementById("empleados");
 const form_empl = document.getElementById("nuevo_empl");
+const btn_guardar_empl = document.getElementById("guardar_empl");
 
 $(document).ready(function(){
     llenar_tabla_empl()
@@ -7,11 +8,6 @@ $(document).ready(function(){
     btn_empleados.addEventListener("click", function() {
         $("#modal-empl").modal("show");
         iniciar_datatable();
-    });
-
-    form_empl.addEventListener("submit", function (event) {
-        event.preventDefault();
-        alert("enviar");
     });
 
     $("#inventario").click(function() {
@@ -82,7 +78,6 @@ function llenar_tabla_empl() {
                     }
                     fila.appendChild(celda);
                 });
-
                 cuerpoTabla.appendChild(fila)
             });
             
@@ -107,4 +102,18 @@ function reiniciar_pad_empl() {
     $("#nav-home-tab").addClass("active");
     $("#nav-home").removeClass("disabled");
     $("#nav-home").addClass("show active");
+    $("#input_user").addClass("d-none");
+    $("#nav-home-tab").removeClass("disabled");
+}
+
+function editar_empl(_usuario) {
+    $("#nav-home-tab").removeClass("active");
+    $("#nav-home").addClass("disabled");
+    $("#nav-home").removeClass("show active");
+    $("#nav-profile-tab").addClass("active");
+    $("#nav-profile").addClass("show active");
+    $("#nav-profile").removeClass("disabled");
+    $("#input_user").removeClass("d-none");
+    $("#nav-home-tab").addClass("disabled");
+    $("#_usuario").val(_usuario.id);
 }

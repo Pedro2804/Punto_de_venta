@@ -21,7 +21,7 @@
             <input type="hidden" id="option" name="option" value="login"/>
             <div class="mb-3 input-group">
                 <img src="img/elementos/person.svg" class="input-group-text">
-                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" required/>
+                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" autofocus required/>
             </div>
             <div class=" mb-3 input-group">
                 <img src="img/elementos/lock.svg" class="input-group-text">

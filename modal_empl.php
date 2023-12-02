@@ -32,8 +32,17 @@
                             <tbody></tbody>
                         </table>
                     </div>
-                    <div class="tab-pane fade disabled" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <form class="row g-4" id="nuevo_empl">
+                    <div class="tab-pane fade disabled" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">    
+                    <form action="controller/controller.php" class="row g-4" method="POST" >
+                        <input type="hidden" id="option" name="option" value="guardar_empl"/>
+                            <div class="col-md-12 d-none" id="input_user">
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <img src="img/elementos/person.svg" class="input-group-text">
+                                        <input type="text" class="form-control" id="_usuario" name="_usuario" placeholder="" disabled/>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">N</span>
@@ -112,7 +121,7 @@
                             </div>
 
                             <div class="col-12 gap-2 d-flex justify-content-center">
-                                <button type="button" class="btn btn-outline-dark" id="guardar_empl">Guardar</button>
+                                <button type="submit" class="btn btn-outline-dark" id="guardar_empl">Guardar</button>
                                 <button type="button" onclick="cancelar_empl()" class="btn btn-outline-danger" id="ini">Cancelar</button>
                             </div>
                         </form>                               
