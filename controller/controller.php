@@ -18,8 +18,12 @@
             session_destroy();
             header('Location: ../');
             break;
-        case 'show_user':
-            $result = show_user();
+        case 'fill_table':
+            $result = fill_table();
+            echo json_encode($result);
+            break;
+        case 'user_repeat':
+            $result = user_repeat($_POST['user']);
             echo json_encode($result);
             break;
         case 'show':

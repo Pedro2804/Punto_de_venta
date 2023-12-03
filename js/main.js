@@ -1,20 +1,20 @@
-const user = document.getElementById("usuario");
+const user = document.getElementById("user");
 const passwd = document.getElementById("passwd");
-const btn_iniciar = document.getElementById("iniciarS");
+const btn_iniciar = document.getElementById("login");
 
 user.addEventListener('keypress', function (e) {
-    (e.charCode == 13) ? validar() : "";
+    (e.charCode == 13) ? validate() : "";
 });
 
 passwd.addEventListener('keypress', function(e) {
-    (e.charCode == 13) ? validar() : "";
+    (e.charCode == 13) ? validate() : "";
 });
 
 btn_iniciar.addEventListener("click", function() {
-    validar();
+    validate();
 });
 
-function validar() {
+function validate() {
     if(user.value == "" || passwd.value == ""){
         passwd.reportValidity();
         user.reportValidity();
@@ -22,7 +22,7 @@ function validar() {
         $.ajax({
             type: "POST",
             url: "controller/controller.php",
-            data: $("#milogin").serialize(),
+            data: $("#mylogin").serialize(),
             cache: false,
             success: function(result) {
                 var res = JSON.parse(result);
@@ -36,7 +36,7 @@ function validar() {
                             })
                         },
                     1 : function(){
-                            window.location.href = 'sistema.php';
+                            window.location.href = 'system.php';
                             /*Swal.fire({
                                 icon: 'question',
                                 title: '¿Cómo desea acceder?',
@@ -66,7 +66,7 @@ function validar() {
                         }
                 }
                 results[res]();
-                $("#milogin").trigger("reset");
+                $("#mylogin").trigger("reset");
                 user.focus();
             }
         });

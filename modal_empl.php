@@ -4,22 +4,22 @@
         <div class="modal-content" style="max-height: 600px;">
             <div class="modal-header text-white" style="background: #808080;" >
                 <h5 class="modal-title" id="staticBackdropLabel">USUARIOS</h5>
-                <button type="button" class="btn-close btn-danger" onclick="cerrar_modal_empl()" id="btn_cerrar" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-danger" id="btn_close_modal_empl" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body " style="padding: 10px !important;" >
                 <nav class="navbar">
                     <div class="nav nav-tabs " id="nav-tab" role="tablist">
-                        <button class="nav-link text-black active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                        <button class="nav-link text-black active" id="nav-btn-show" data-bs-toggle="tab" data-bs-target="#nav-show" type="button" role="tab" aria-controls="nav-show" aria-selected="true">
                             <img src="img/Elementos/view.svg" alt="" class="d-inline-block align-text-top">Mostrar
                         </button>
-                        <button class="nav-link text-black" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+                        <button class="nav-link text-black" id="nav-btn-new" data-bs-toggle="tab" data-bs-target="#nav-new" type="button" role="tab" aria-controls="nav-new" aria-selected="false">
                             <img src="img/Elementos/plus.svg" alt="" class="d-inline-block align-text-top">Nuevo
                         </button>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <table id="Tabla_empl" class="table table-hover table-borderless" cellspacing="0">
+                    <div class="tab-pane fade show active" id="nav-show" role="tabpanel" aria-labelledby="nav-btn-show">
+                        <table id="Table_empl" class="table table-hover table-borderless" cellspacing="0">
                             <thead class="bg-dark text-white">
                                 <tr>
                                     <th>Usuario</th>
@@ -32,63 +32,83 @@
                             <tbody></tbody>
                         </table>
                     </div>
-                    <div class="tab-pane fade disabled" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">    
-                    <form action="controller/controller.php" class="row g-4" method="POST" >
-                        <input type="hidden" id="option" name="option" value="guardar_empl"/>
+                    <div class="tab-pane fade disabled" id="nav-new" role="tabpanel" aria-labelledby="nav-btn-new">    
+                    <form action="controller/controller.php" id="form_new_empl" class="row g-4 needs-validation" novalidate="" method="POST" >
+                        <input type="hidden" id="option" name="option" value="save_empl"/>
                             <div class="col-md-12 d-none" id="input_user">
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <img src="img/elementos/person.svg" class="input-group-text">
-                                        <input type="text" class="form-control" id="_usuario" name="_usuario" placeholder="" disabled/>
+                                        <input type="text" class="form-control" id="_user" name="_user" placeholder="" disabled/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">N</span>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required/>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" required=""/>
+                                    <div class="valid-feedback">
+                                        ¡Se ve bien!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">P</span>
-                                    <input type="text" class="form-control" id="paterno" name="paterno" placeholder="Apellido Paterno" required/>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Apellido Paterno" required=""/>
+                                    <div class="valid-feedback">
+                                        ¡Se ve bien!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">M</span>
-                                    <input type="text" class="form-control" id="materno" name="materno" placeholder="Apellido materno"required/>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Apellido materno"required=""/>
+                                    <div class="valid-feedback">
+                                        ¡Se ve bien!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <img src="img/elementos/phone.svg" class="input-group-text">
-                                    <input type="tel" class="form-control" maxlength="10" id="telefono" name="telefono" placeholder="Telefono"required/>
+                                    <input type="tel" class="form-control" maxlength="10" id="phone" name="phone" placeholder="Telefono" required=""/>
+                                    <div class="valid-feedback">
+                                        ¡Se ve bien!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="input-group">
+                                <div class="input-group" id="div_input_user">
                                     <img src="img/elementos/person.svg" class="input-group-text">
-                                    <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" required/>
+                                    <input type="text" class="form-control" id="user" name="user" placeholder="Usuario" required=""/>
+
+                                    <div class="" id="div_valid_user"></div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class=" mb-3 input-group">
                                     <img src="img/elementos/password.svg" class="input-group-text">
-                                    <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña" required/>
+                                    <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña" required=""/>
+                                    <div class="valid-feedback">
+                                        ¡Se ve bien!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class=" mb-3 input-group">
                                     <img src="img/elementos/password.svg" class="input-group-text">
-                                    <input type="password" class="form-control" id="confPasswd" name="confPasswd" placeholder="Confirmar contraseña" required/>
+                                    <input type="password" class="form-control" id="confPasswd" name="confPasswd" placeholder="Confirmar contraseña" required=""/>
+                                    <div class="valid-feedback">
+                                        ¡Se ve bien!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
                                 <h5>PERMISOS</h5>
                             </div>
-
+<!--
                             <div class="col-md-2">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" role="switch" id="empl">
@@ -119,10 +139,10 @@
                                     <label class="form-check-label" for="vent">Ventas</label>
                                 </div>
                             </div>
-
+-->
                             <div class="col-12 gap-2 d-flex justify-content-center">
-                                <button type="submit" class="btn btn-outline-dark" id="guardar_empl">Guardar</button>
-                                <button type="button" onclick="cancelar_empl()" class="btn btn-outline-danger" id="ini">Cancelar</button>
+                                <button type="submit" class="btn btn-outline-dark" id="save_empl">Guardar</button>
+                                <button type="button" class="btn btn-outline-danger" id="cancel">Cancelar</button>
                             </div>
                         </form>                               
                     </div>

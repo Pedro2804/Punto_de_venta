@@ -17,18 +17,18 @@
             <img src="img/Elementos/user.png" style="height: 8rem;" alt="">
         </div>
         <div class="text-center fs-1 fw-bold" >Login</div>
-        <form id="milogin">
+        <form id="mylogin">
             <input type="hidden" id="option" name="option" value="login"/>
             <div class="mb-3 input-group">
                 <img src="img/elementos/person.svg" class="input-group-text">
-                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" autofocus required/>
+                <input type="text" class="form-control" id="user" name="user" placeholder="Usuario" autofocus required/>
             </div>
             <div class=" mb-3 input-group">
                 <img src="img/elementos/lock.svg" class="input-group-text">
-                <input type="password" class="form-control contraseña" id="passwd" name="passwd" placeholder="Contraseña" required/>
+                <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña" required/>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="button" class="btn btn-outline-dark boton" id="iniciarS">Iniciar sesión</button>
+                <button type="button" class="btn btn-outline-dark boton" id="login">Iniciar sesión</button>
             </div>
         </form>
     </div>    

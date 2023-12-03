@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
+    <title>Santos</title>
     <link rel="stylesheet" href="css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="css/sweetalert2.min.css">
     <link rel="stylesheet" href="css/css_bootstrap.min.css">
@@ -32,19 +32,19 @@
         <div class="container-fluid">
             <div class="row text-white ms-3">
                 <ul class="navbar-nav mb-3 mb-lg-0">
-                    <li class="nav me-3" id="empleados"  style="cursor: pointer;">
+                    <li class="nav me-3" id="employees"  style="cursor: pointer;">
                         <img src="img/Elementos/empleados.svg" alt="" class="d-inline-block align-text-top">
                         Usuarios
                     </li>
-                    <li class="nav me-3" id="inventario" style="cursor: pointer;">
+                    <li class="nav me-3" id="inventory" style="cursor: pointer;">
                         <img src="img/Elementos/inventory.svg" alt="" class="d-inline-block align-text-top">
                         Inventario
                     </li>
-                    <li class="nav me-3" id="categorias" style="cursor: pointer;">
-                        <img src="img/Elementos/category.svg" alt="" class="d-inline-block align-text-top">
+                    <li class="nav me-3" id="client" style="cursor: pointer;">
+                        <img src="img/Elementos/person.svg" alt="" class="d-inline-block align-text-top">
                         Clientes
                     </li>
-                    <li class="nav me-3" id="ventas" style="cursor: pointer;">
+                    <li class="nav me-3" id="sales" style="cursor: pointer;">
                         <img src="img/Elementos/finance.svg" alt="" class="d-inline-block align-text-top">
                         Ventas
                     </li>
@@ -59,7 +59,8 @@
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/sweetalert2.all.min.js"></script>
     <script src="js/jquery.dataTables.min.js" charset="utf8"></script>
-    <script src="js/empleado.js"></script>
+    <script src="js/system.js"></script>
+    <script src="js/modal_empl.js"></script>
     
 </body>
 </html>
