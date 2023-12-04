@@ -1,24 +1,22 @@
-const user = document.getElementById("user");
-const passwd = document.getElementById("passwd");
-const btn_iniciar = document.getElementById("login");
+(() => {
+    'use strict'
+    const form_mylogin = document.getElementById("mylogin");
+    const formInputs = form_mylogin.querySelectorAll('.form-control');
 
-user.addEventListener('keypress', function (e) {
-    (e.charCode == 13) ? validate() : "";
-});
+    formInputs.forEach(input => {
+        input.addEventListener('input', () => {
+            input.value = input.value.replace(/[^a-z_A-Z0-9]/g, '');
+        });
+    });
 
-passwd.addEventListener('keypress', function(e) {
-    (e.charCode == 13) ? validate() : "";
-});
+    form_mylogin.addEventListener('submit', event => {
+        if (!form_mylogin.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+            return;
+        }
 
-btn_iniciar.addEventListener("click", function() {
-    validate();
-});
-
-function validate() {
-    if(user.value == "" || passwd.value == ""){
-        passwd.reportValidity();
-        user.reportValidity();
-    }else{
+        event.preventDefault();
         $.ajax({
             type: "POST",
             url: "controller/controller.php",
@@ -33,7 +31,7 @@ function validate() {
                                 title: 'Usuario incorrecto',
                                 timer: 1500,
                                 showConfirmButton: false
-                            })
+                            });
                         },
                     1 : function(){
                             window.location.href = 'system.php';
@@ -62,7 +60,7 @@ function validate() {
                                 title: 'Contraseña incorrecta',
                                 timer: 1500,
                                 showConfirmButton: false
-                            })
+                            });
                         }
                 }
                 results[res]();
@@ -70,5 +68,5 @@ function validate() {
                 user.focus();
             }
         });
-    }
-}
+    }, false);
+})();

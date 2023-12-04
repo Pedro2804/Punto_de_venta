@@ -32,19 +32,19 @@
         <div class="container-fluid">
             <div class="row text-white ms-3">
                 <ul class="navbar-nav mb-3 mb-lg-0">
-                    <li class="nav me-3" id="employees"  style="cursor: pointer;">
+                    <li class="nav me-3 menu" id="employees"  style="cursor: pointer;">
                         <img src="img/Elementos/empleados.svg" alt="" class="d-inline-block align-text-top">
                         Usuarios
                     </li>
-                    <li class="nav me-3" id="inventory" style="cursor: pointer;">
+                    <li class="nav me-3 menu" id="inventory" style="cursor: pointer;">
                         <img src="img/Elementos/inventory.svg" alt="" class="d-inline-block align-text-top">
                         Inventario
                     </li>
-                    <li class="nav me-3" id="client" style="cursor: pointer;">
+                    <li class="nav me-3 menu" id="client" style="cursor: pointer;">
                         <img src="img/Elementos/person.svg" alt="" class="d-inline-block align-text-top">
                         Clientes
                     </li>
-                    <li class="nav me-3" id="sales" style="cursor: pointer;">
+                    <li class="nav me-3 menu" id="sales" style="cursor: pointer;">
                         <img src="img/Elementos/finance.svg" alt="" class="d-inline-block align-text-top">
                         Ventas
                     </li>

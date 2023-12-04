@@ -28,7 +28,7 @@
                 <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña" required/>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="button" class="btn btn-outline-dark boton" id="login">Iniciar sesión</button>
+                <button type="submit" class="btn btn-outline-dark boton" id="login">Iniciar sesión</button>
             </div>
         </form>
     </div>    

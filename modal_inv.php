@@ -1,9 +1,9 @@
 <!--START MODAL EMPLEADOS-->
-<div class="modal fade" id="modal-empl" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modal-inv" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" style="user-select: none;" >
         <div class="modal-content" style="max-height: 600px;">
             <div class="modal-header text-white" style="background: #808080;" >
-                <h5 class="modal-title" id="staticBackdropLabel">USUARIOS</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Inventario</h5>
                 <button type="button" class="btn-close btn-danger" id="btn_close_modal_empl" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body " style="padding: 10px !important;" >
@@ -46,50 +46,63 @@
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">N</span>
-                                    <input type="text" class="form-control name" id="name" name="name" placeholder="Nombre" required=""/>
-                                    <div class="invalid-feedback"></div>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" required=""/>
+                                    <div class="valid-feedback">
+                                        ¡Se ve bien!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">P</span>
-                                    <input type="text" class="form-control name" id="first_name" name="first_name" placeholder="Apellido Paterno" required=""/>
-                                    <div class="invalid-feedback"></div>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Apellido Paterno" required=""/>
+                                    <div class="valid-feedback">
+                                        ¡Se ve bien!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">M</span>
-                                    <input type="text" class="form-control name" id="last_name" name="last_name" placeholder="Apellido materno"required=""/>
-                                    <div class="invalid-feedback"></div>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Apellido materno"required=""/>
+                                    <div class="valid-feedback">
+                                        ¡Se ve bien!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <img src="img/elementos/phone.svg" class="input-group-text">
                                     <input type="tel" class="form-control" maxlength="10" id="phone" name="phone" placeholder="Telefono" required=""/>
-                                    <div class="invalid-feedback"></div>
+                                    <div class="valid-feedback">
+                                        ¡Se ve bien!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="input-group">
                                     <img src="img/elementos/person.svg" class="input-group-text">
-                                    <input type="text" class="form-control user" id="user" name="user" placeholder="Usuario" required=""/>
-                                    <div class="invalid-feedback"></div>
+                                    <input type="text" class="form-control" id="user" name="user" placeholder="Usuario" required=""/>
+
+                                    <div class="" id="div_valid_user"></div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class=" mb-3 input-group">
                                     <img src="img/elementos/password.svg" class="input-group-text">
-                                    <input type="password" class="form-control user" id="passwd" name="passwd" placeholder="Contraseña" required=""/>
-                                    <div class="invalid-feedback"></div>
+                                    <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña" required=""/>
+                                    <div class="valid-feedback">
+                                        ¡Se ve bien!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class=" mb-3 input-group">
                                     <img src="img/elementos/password.svg" class="input-group-text">
-                                    <input type="password" class="form-control user" id="confPasswd" name="confPasswd" placeholder="Confirmar contraseña" required=""/>
-                                    <div class="invalid-feedback"></div>
+                                    <input type="password" class="form-control" id="confPasswd" name="confPasswd" placeholder="Confirmar contraseña" required=""/>
+                                    <div class="valid-feedback">
+                                        ¡Se ve bien!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12 d-flex justify-content-center">

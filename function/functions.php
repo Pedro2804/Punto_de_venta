@@ -43,15 +43,19 @@
         return $obj;
     }
 
-    function user_repeat($user){
-        $params = array("user" => $user);
+    function user_repeat(){
         $pdo = new conexion();
+        $obj = array();
+        $sql = $pdo->conn->prepare("SELECT id_usuario FROM usuario");
+        $sql->execute();
 
-        $sql = $pdo->conn->prepare("SELECT * FROM usuario WHERE id_usuario = :user");
-        $sql->execute($params);
+        $i=0;
+        while($row = $sql->fetch(PDO::FETCH_ASSOC)){
+            $obj[$i] = $row["id_usuario"];
+            $i++;
+        }
         $pdo->disconected();
-
-        return $sql->fetch(PDO::FETCH_ASSOC) ? 1 : 0;
+        return $obj;
     }
 
     function show($id){

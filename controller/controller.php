@@ -23,7 +23,7 @@
             echo json_encode($result);
             break;
         case 'user_repeat':
-            $result = user_repeat($_POST['user']);
+            $result = user_repeat();
             echo json_encode($result);
             break;
         case 'show':

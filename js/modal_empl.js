@@ -1,87 +1,101 @@
 const btn_close_modal = document.getElementById('btn_close_modal_empl');
 const btn_nav_show = document.getElementById("nav-btn-show");
 const btn_nav_new = document.getElementById("nav-btn-new");
-const input_name = document.getElementById("name");
-const input_firstname = document.getElementById("first_name");
-const input_lastname = document.getElementById("last_name");
-const div_valid_user = document.getElementById("div_valid_user");
-const input_user = document.getElementById("user");
-const input_passwd = document.getElementById("passwd");
-const input_confPasswd = document.getElementById("confPasswd");
-//const form_empl = document.getElementById("form_new_empl");
 const form_empl = document.querySelectorAll('.needs-validation');
 const btn_save_empl = document.getElementById("save_empl");
 const btn_cancel = document.getElementById("cancel");
 
+const input_name = document.querySelectorAll('.name');
+const input_phone = document.getElementById("phone");
+const input_user = document.querySelectorAll('.user');
+let users;
+
 $(document).ready(function () {
+    list_users();
+
     btn_close_modal.addEventListener("click", function () {
         close_modal_empl();
-        div_valid_user.classList.remove('invalid-feedback');
-        div_valid_user.classList.remove('valid-feedback');
-        div_valid_user.innerHTML = '';
-        input_user.classList.remove('is-invalid');
-        input_user.classList.remove('is-valid');
-        input_user.removeAttribute('aria-describedby');
     });
 
-    input_name.addEventListener("input", function () {
-        mayus(this);
+    input_name.forEach(input => {
+        input.addEventListener("input", () => {
+            var entrada = input.value;
+            entrada = entrada.replace(/[^a-z A-Z]/g, '');
+
+            if(entrada.length == 1){
+                entrada = entrada.toUpperCase();
+            }
+
+            if (entrada[0] == ' ' || entrada[entrada.length - 1] == ' '){
+                input.classList.add("is-invalid");
+                input.nextElementSibling.innerHTML = '!No debe empezar ni terminar con espacio¡';
+            }else{
+                input.classList.remove("is-invalid");
+                input.nextElementSibling.innerHTML = '';
+            }
+
+            input.value = entrada;
+        });
     });
 
-    input_firstname.addEventListener("input", function () {
-        mayus(this);
+    input_phone.addEventListener("input", () => {
+        var valor = input_phone.value;
+
+        valor = valor.replace(/[^0-9]/g, '');
+    
+        if (valor.length === 10) {
+          valor = '(' + valor.substr(0, 3) + ') ' + valor.substr(3, 3) + '-' + valor.substr(6, 4);
+        }
+    
+        input_phone.value = valor;
     });
 
-    input_lastname.addEventListener("input", function () {
-        mayus(this);
-    });
+    input_user.forEach(input => {
+        input.addEventListener("input", () => {
+            var entrada = input.value;
+            var val = '';
+            entrada = entrada.replace(/[^a-z_A-Z0-9]/g, '');
 
-    input_user.addEventListener("input", function () {
-        mayus(this);
-    });
+            val = (entrada[0] == '_' || entrada[entrada.length - 1] == '_') ? '!No debe empezar ni terminar con _ ¡' : '';
 
-    input_passwd.addEventListener("input", function () {
-        mayus(this);
-    });
+            if (input.id == "user"){
+                if (users != undefined && users.includes(entrada)){
+                    val = '!El usuario ya existe¡';
+                }
+            }else{
+                var passwd = document.getElementById("passwd");
+                var confPasswd = document.getElementById("confPasswd");
 
-    input_confPasswd.addEventListener("input", function () {
-        mayus(this);
+                if ((passwd.value != "") && (confPasswd.value != "") && (passwd.value != confPasswd.value)){
+                    val = '!La contraseña no coincide¡';
+                }
+
+                if ((passwd.value != "") && (confPasswd.value != "") && (passwd.value == confPasswd.value)){
+                    passwd.classList.remove("is-invalid");
+                    passwd.nextElementSibling.innerHTML = '';
+                    confPasswd.classList.remove("is-invalid");
+                    confPasswd.nextElementSibling.innerHTML = '';
+                }
+            }
+
+            if(val != ''){
+                input.classList.add("is-invalid");
+                input.nextElementSibling.innerHTML = val;
+            }else{
+                input.classList.remove("is-invalid");
+                input.nextElementSibling.innerHTML = '';
+            }
+
+            input.value = entrada;
+        });
     });
 
     btn_cancel.addEventListener("click", function () {
         reset_pad_empl();
     });
 
-    $("#phone").on('input', function() {
-        var input = $(this);
-        var valor = input.val();
-    
-        // Quitar cualquier caracter no numérico, como espacios o guiones
-        valor = valor.replace(/[^0-9]/g, '');
-    
-        // Formatear el número de teléfono, por ejemplo, (123) 456-7890
-        if (valor.length === 10) {
-          valor = '(' + valor.substr(0, 3) + ') ' + valor.substr(3, 3) + '-' + valor.substr(6, 4);
-        }
-    
-        input.val(valor);
-    });
-
       validate_form();
 });
-
-function start_datatable() {
-    $("#Table_empl").DataTable({
-        "lengthMenu": [7], // Personaliza las opciones de longitud de página
-        //"scrollY": "300px",
-        //"scrollCollapse": false,
-        //"paging": false, // Desactiva la paginación
-        "responsive" : true,
-        "language": {
-            "url": "js/es-ES.json"
-          }
-    });
-}
 
 function fill_table_empl() {
     $.ajax({
@@ -108,7 +122,6 @@ function fill_table_empl() {
                 });
                 cuerpoTabla.appendChild(fila)
             });
-            
         }
     });
 }
@@ -146,57 +159,19 @@ function edit_empl(_usuario) {
     $("#_user").val(_usuario.id);
 }
 
-function mayus(input) {
-    var entrada = input.value;
-    if ((input.id == 'name') || (input.id == 'first_name') || (input.id == 'last_name')) {
-        entrada = entrada.replace(/[^a-z A-Z]/g, '');
-
-        if(entrada.length == 1){
-            entrada = entrada.toUpperCase();
+function list_users() {
+    $.ajax({
+        type: "POST",
+        url: "controller/controller.php",
+        data: {option: "user_repeat"},
+        cache: false,
+        success: function(result) {
+            users = JSON.parse(result)
+        },
+        error: function(error) {
+            console.error(error);
         }
-
-        input.value = entrada;
-    }else if ((input.id == 'passwd') || (input.id == 'confPasswd')){
-        entrada = entrada.replace(/[^a-z_A-Z0-9]/g, '');
-        input.value = entrada;
-    }else{
-        entrada = entrada.replace(/[^a-z_A-Z0-9]/g, '');
-        input.value = entrada;
-
-        $.ajax({
-            type: "POST",
-            url: "controller/controller.php",
-            data: {option: "user_repeat", user: input.value},
-            cache: false,
-            success: function(result) {
-                var data = JSON.parse(result);
-                if (input_user.value.length >= 1){
-                    if(data == 1){
-                        div_valid_user.classList.remove('valid-feedback');
-                        div_valid_user.classList.add('invalid-feedback');
-                        div_valid_user.innerHTML = '¡Ya existe el usuario!';
-                        input_user.classList.remove('is-valid');
-                        input_user.classList.add('is-invalid');
-                        input_user.setAttribute('aria-describedby', 'div_valid_user');
-                    }else{
-                        div_valid_user.classList.remove('invalid-feedback');
-                        div_valid_user.classList.add('valid-feedback');
-                        div_valid_user.innerHTML = '¡Correccto!';
-                        input_user.classList.remove('is-invalid');
-                        input_user.classList.add('is-valid');
-                        input_user.removeAttribute('aria-describedby');
-                    }
-                }else{
-                    div_valid_user.classList.remove('invalid-feedback');
-                    div_valid_user.classList.remove('valid-feedback');
-                    div_valid_user.innerHTML = '';
-                    input_user.classList.remove('is-invalid');
-                    input_user.classList.remove('is-valid');
-                    input_user.removeAttribute('aria-describedby');
-                }       
-            }
-        });
-    }
+    });
 }
 
 function validate_form() {

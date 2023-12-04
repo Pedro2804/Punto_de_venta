@@ -1,25 +1,31 @@
-const btn_employees = document.getElementById("employees");
-const btn_inventory = document.getElementById("inventory");
-const btn_client = document.getElementById("client");
-const btn_sales = document.getElementById("sales");
+const menu = document.querySelectorAll('.menu');
 
 $(document).ready(function(){
-    fill_table_empl()
+    fill_table_empl();
 
-    btn_employees.addEventListener("click", function() {
-        $("#modal-empl").modal("show");
-        start_datatable();
-    });
-
-    btn_inventory.addEventListener("click", function () {
-        alert("inv_js");
-    });
-
-    btn_client.addEventListener("click", function () {
-        alert("client_js");
-    });
-
-    btn_sales.addEventListener("click", function () {
-        alert("sales_js");
+    menu.forEach(btn => {
+        btn.addEventListener("click", () => {
+            var modal = btn.id == "employees" ? "#modal-empl": 
+                        btn.id == "inventory" ? "#modal-inv" :
+                        btn.id == "client" ? "#modal-client" :
+                        btn.id == "sales" ? "#modal-sales" : "";
+            if (modal != ""){
+                $(modal).modal("show");
+                start_datatable();
+            }
+        });
     });
 });
+
+function start_datatable() {
+    $("#Table_empl").DataTable({
+        "lengthMenu": [7], // Personaliza las opciones de longitud de página
+        //"scrollY": "300px",
+        //"scrollCollapse": false,
+        //"paging": false, // Desactiva la paginación
+        "responsive" : true,
+        "language": {
+            "url": "js/es-ES.json"
+          }
+    });
+}
