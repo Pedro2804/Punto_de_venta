@@ -65,7 +65,7 @@
                 }
                 results[res]();
                 $("#mylogin").trigger("reset");
-                user.focus();
+                document.getElementById("user").focus();
             }
         });
     }, false);

@@ -2,7 +2,6 @@ const btn_close_modal = document.getElementById('btn_close_modal_empl');
 const btn_nav_show = document.getElementById("nav-btn-show");
 const btn_nav_new = document.getElementById("nav-btn-new");
 const form_empl = document.querySelectorAll('.needs-validation');
-const btn_save_empl = document.getElementById("save_empl");
 const btn_cancel = document.getElementById("cancel");
 
 const input_name = document.querySelectorAll('.name');

@@ -47,7 +47,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">N</span>
                                     <input type="text" class="form-control name" id="name" name="name" placeholder="Nombre" required=""/>
-                                    <div class="invalid-feedback"></div>
+                                    <div class="invalid-feedback">!Introduce un nombre¡</div>
                                 </div>
                             </div>
                             <div class="col-md-3">
