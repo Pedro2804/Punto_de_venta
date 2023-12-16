@@ -53,7 +53,7 @@
         </div>
     </nav>
 
-    <?php include("modal_empl.php"); ?>
+    <?php include("modal_empl.php");?>
 
     <script src="js/js_bootstrap.bundle.min.js"></script>
     <script src="js/jquery-3.7.1.min.js"></script>

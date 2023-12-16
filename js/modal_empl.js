@@ -1,16 +1,29 @@
 const btn_close_modal = document.getElementById('btn_close_modal_empl');
 const btn_nav_show = document.getElementById("nav-btn-show");
 const btn_nav_new = document.getElementById("nav-btn-new");
-const form_empl = document.querySelectorAll('.needs-validation');
+const form_empl = document.getElementById('form_new_empl');
 const btn_cancel = document.getElementById("cancel");
 
 const input_name = document.querySelectorAll('.name');
 const input_phone = document.getElementById("phone");
 const input_user = document.querySelectorAll('.user');
+
+const div_id_user = document.getElementById("input_user");
+let _userval;
+let action = [];
+
+const aux = document.getElementById('empl');
 let users;
 
 $(document).ready(function () {
     list_users();
+
+    fill_table_empl();
+
+    aux.addEventListener("change", ()=>{
+        console.log(aux.checked);
+        document.getElementById('sale').checked = true;
+    });
 
     btn_close_modal.addEventListener("click", function () {
         close_modal_empl();
@@ -39,12 +52,22 @@ $(document).ready(function () {
 
     input_phone.addEventListener("input", () => {
         var valor = input_phone.value;
+        var aux = '';
 
         valor = valor.replace(/[^0-9]/g, '');
     
-        if (valor.length === 10) {
-          valor = '(' + valor.substr(0, 3) + ') ' + valor.substr(3, 3) + '-' + valor.substr(6, 4);
+        if ((valor.length === 10) || (valor.length === 0)) {
+            if (valor.length === 10){
+                valor = '(' + valor.substr(0, 3) + ') ' + valor.substr(3, 3) + '-' + valor.substr(6, 4);
+            }
+            input_phone.classList.remove("is-invalid");
+            aux = '';
+        }else if (((valor.length > 0) && (valor.length < 10)) || (valor.length > 10)){
+            input_phone.classList.add("is-invalid");
+            aux = '¡Solo 10 caracteres!';
         }
+
+        input_phone.nextElementSibling.innerHTML = aux;
     
         input_phone.value = valor;
     });
@@ -113,14 +136,28 @@ function fill_table_empl() {
                 index.forEach(e => {
                     let celda = document.createElement("td");
                     if(e !== "Editar" && e !== "Eliminar"){
+                        if(e == "Usuario"){
+                            action.push(element[e]);
+                        }
                         celda.textContent = element[e];
                     }else{
                         celda.innerHTML =  element[e];
                     }
                     fila.appendChild(celda);
                 });
-                cuerpoTabla.appendChild(fila)
+                cuerpoTabla.appendChild(fila);
             });
+
+            action.forEach(o => {
+                const button = document.getElementById(o);
+    
+                button.addEventListener("click", function() {
+                    edit_empl(o);
+                });
+            });
+            
+        }, error: function(error) {
+            console.error("Hubo un error al llenar la tabla: ", error);
         }
     });
 }
@@ -131,6 +168,12 @@ function close_modal_empl() {
 }
 
 function reset_pad_empl() {
+    for (let i = 0; i < 3; i++) {
+        input_name[i].classList.remove('is-invalid');
+        input_user[i].classList.remove('is-invalid');
+        input_name[i].nextElementSibling.innerHTML = '';
+        input_user[i].nextElementSibling.innerHTML = '';
+    }
     btn_nav_new.classList.remove('active');
     btn_nav_show.classList.add('active');
     btn_nav_show.classList.remove('d-none');
@@ -140,8 +183,9 @@ function reset_pad_empl() {
     $("#nav-new").addClass("disabled");
     $("#nav-show").removeClass("disabled");
     $("#nav-show").addClass("show active");
-    $("#input_user").addClass("d-none");
+    div_id_user.classList.add("d-none");
     $("#form_new_empl").trigger("reset");
+    _userval = "";
 }
 
 function edit_empl(_usuario) {
@@ -154,8 +198,9 @@ function edit_empl(_usuario) {
     $("#nav-show").removeClass("show active");
     $("#nav-new").addClass("show active");
     $("#nav-new").removeClass("disabled");
-    $("#input_user").removeClass("d-none");
-    $("#_user").val(_usuario.id);
+    div_id_user.classList.remove("d-none");
+    $("#_user").val(_usuario);
+    _userval = _usuario;
 }
 
 function list_users() {
@@ -174,14 +219,25 @@ function list_users() {
 }
 
 function validate_form() {
-    Array.from(form_empl).forEach(form => {
-        form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
+    form_empl.addEventListener('submit', event => {
+        if (!form_empl.checkValidity()){
             event.preventDefault();
             event.stopPropagation();
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "controller/controller.php",
+            data: {option: "user_repeat"},
+            cache: false,
+            success: function(result) {
+                users = JSON.parse(result)
+            },
+            error: function(error) {
+                console.error(error);
             }
-    
-            form.classList.add('was-validated');
-        }, false);
-    });
+        });
+
+    }, false);
 }

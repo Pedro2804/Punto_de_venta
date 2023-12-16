@@ -20,7 +20,7 @@
         $.ajax({
             type: "POST",
             url: "controller/controller.php",
-            data: $("#mylogin").serialize(),
+            data: {user: $("#user").val(), passwd: $("#passwd").val(), option: "login"},
             cache: false,
             success: function(result) {
                 var res = JSON.parse(result);

@@ -1,4 +1,8 @@
 <?php
+    if(!isset($_SESSION["global_user"])){
+        header("Location: ../error.php");
+    }
+    
     class conexion{
         public $conn;
 

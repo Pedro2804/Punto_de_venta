@@ -1,7 +1,6 @@
 const menu = document.querySelectorAll('.menu');
 
 $(document).ready(function(){
-    fill_table_empl();
 
     menu.forEach(btn => {
         btn.addEventListener("click", () => {

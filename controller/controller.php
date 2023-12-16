@@ -3,7 +3,7 @@
     //print_r() verifica lo que se imprime
     require("../function/functions.php");
 
-    $option = isset($_REQUEST["option"]) ? $_REQUEST["option"] : '';
+    $option = isset($_REQUEST["option"]) ? $_REQUEST["option"] : header("Location: ../error.php");
 
     switch ($option) {
         case 'login':
@@ -16,7 +16,7 @@
             break;
         case 'logout':
             session_destroy();
-            header('Location: ../');
+            header('Location: ../index.php');
             break;
         case 'fill_table':
             $result = fill_table();
@@ -27,13 +27,13 @@
             echo json_encode($result);
             break;
         case 'show':
-                $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : '';
-                $result = show($id);
-                echo json_encode($result);
-                break;
+            $id = isset($_POST["id"]) ? $_POST["id"] : '';
+            $result = show($id);
+            echo json_encode($result);
+            break;
 
         default:
-            echo json_encode("Select a option valid");
+            header("Location: ../error.php");
             break;
     }
     $conn = null;

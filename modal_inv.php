@@ -1,3 +1,8 @@
+<?php
+    if(!isset($_SESSION["global_user"])){
+        header("Location: index.php");
+    }
+?>
 <!--START MODAL EMPLEADOS-->
 <div class="modal fade" id="modal-inv" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" style="user-select: none;" >

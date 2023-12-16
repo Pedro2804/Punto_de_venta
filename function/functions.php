@@ -1,4 +1,8 @@
 <?php session_start();
+    if(!isset($_SESSION["global_user"])){
+        header("Location: ../error.php");
+    }
+    
     include("../config/conexion.php");
 
     function login(){
@@ -34,7 +38,7 @@
         $i=0;
         while($row = $sql->fetch(PDO::FETCH_ASSOC)){
             $user = array("Usuario" => $row["id_usuario"], "Nombre" => $row["nombre"], "Telefono" => $row["telefono"],
-                          "Editar" => '<button type="button" class="btn" onclick="edit_empl(this)" id="'.$row["id_usuario"].'"><img src="img/Elementos/edit.svg" title="Editar" width="30" class="d-inline-block align-text-top"></button>',
+                          "Editar" => '<button type="button" class="btn" id="'.$row["id_usuario"].'"><img src="img/Elementos/edit.svg" title="Editar" width="30" class="d-inline-block align-text-top"></button>',
                           "Eliminar" => '<button type="button" class="btn" id="'.$row["id_usuario"].'"><img src="img/Elementos/delete.svg" title="Editar" width="30" class="d-inline-block align-text-top"></button>');
             $obj->usuario[$i] = $user;
             $i++;
