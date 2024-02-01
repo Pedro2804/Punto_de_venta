@@ -38,9 +38,8 @@
                         </table>
                     </div>
                     <div class="tab-pane fade disabled" id="nav-new" role="tabpanel" aria-labelledby="nav-btn-new">    
-                    <form action="controller/controller.php" id="form_new_empl" class="row g-4" method="POST" >
-                        <input type="hidden" id="option" name="option" value="save_empl"/>
-                            <div class="col-md-12 d-none" id="input_user">
+                    <form id="form_new_empl" class="row g-4" >
+                            <div class="col-md-12 d-none" id="id_user">
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <img src="img/elementos/person.svg" class="input-group-text">
@@ -76,7 +75,7 @@
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" id="div_show_user">
                                 <div class="input-group">
                                     <img src="img/elementos/person.svg" class="input-group-text">
                                     <input type="text" class="form-control user" id="user" name="user" placeholder="Usuario" required=""/>

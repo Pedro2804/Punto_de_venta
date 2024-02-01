@@ -24,6 +24,7 @@
             cache: false,
             success: function(result) {
                 var res = JSON.parse(result);
+                
                 const results = {
                     0 : function(){
                             Swal.fire({

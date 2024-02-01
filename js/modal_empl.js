@@ -1,14 +1,15 @@
 const btn_close_modal = document.getElementById('btn_close_modal_empl');
 const btn_nav_show = document.getElementById("nav-btn-show");
 const btn_nav_new = document.getElementById("nav-btn-new");
-const form_empl = document.getElementById('form_new_empl');
+const form_new_empl = document.getElementById('form_new_empl');
 const btn_cancel = document.getElementById("cancel");
 
 const input_name = document.querySelectorAll('.name');
 const input_phone = document.getElementById("phone");
 const input_user = document.querySelectorAll('.user');
+const input_switch = document.querySelectorAll('.form-check-input');
 
-const div_id_user = document.getElementById("input_user");
+const div_id_user = document.getElementById("id_user");
 let _userval;
 let action = [];
 
@@ -116,7 +117,7 @@ $(document).ready(function () {
         reset_pad_empl();
     });
 
-      validate_form();
+    save_employ();
 });
 
 function fill_table_empl() {
@@ -152,7 +153,7 @@ function fill_table_empl() {
                 const button = document.getElementById(o);
     
                 button.addEventListener("click", function() {
-                    edit_empl(o);
+                    show_empl(o);
                 });
             });
             
@@ -183,12 +184,13 @@ function reset_pad_empl() {
     $("#nav-new").addClass("disabled");
     $("#nav-show").removeClass("disabled");
     $("#nav-show").addClass("show active");
+    $("#div_show_user").removeClass("d-none");
     div_id_user.classList.add("d-none");
     $("#form_new_empl").trigger("reset");
     _userval = "";
 }
 
-function edit_empl(_usuario) {
+function show_empl(_usuario) {
     btn_nav_show.classList.remove('active');
     btn_nav_show.classList.add('disabled');
     btn_nav_show.classList.add('d-none');
@@ -198,9 +200,31 @@ function edit_empl(_usuario) {
     $("#nav-show").removeClass("show active");
     $("#nav-new").addClass("show active");
     $("#nav-new").removeClass("disabled");
+    $("#div_show_user").addClass("d-none");
     div_id_user.classList.remove("d-none");
     $("#_user").val(_usuario);
     _userval = _usuario;
+
+    $.ajax({
+        type: "POST",
+        url: "controller/controller.php",
+        data: {option: "show_employ", id: _userval},
+        cache: false,
+        success: function(result) {
+            user = JSON.parse(result)
+            _name = [user.user["Nombre"], user.user["APP"], user.user["APM"]];
+            tel = user.user["Telefono"];
+            tel = '(' + tel.substr(0, 3) + ') ' + tel.substr(3, 3) + '-' + tel.substr(6, 4);
+
+            for (let i = 0; i < input_name.length; i++) {
+                input_name[i].value = _name[i];
+            }
+            input_phone.value = tel;
+        },
+        error: function(error) {
+            console.error(error);
+        }
+    });
 }
 
 function list_users() {
@@ -218,18 +242,27 @@ function list_users() {
     });
 }
 
-function validate_form() {
-    form_empl.addEventListener('submit', event => {
-        if (!form_empl.checkValidity()){
+function save_employ() {
+    form_new_empl.addEventListener('submit', event => {
+        if (!form_new_empl.checkValidity()){
             event.preventDefault();
             event.stopPropagation();
             return;
         }
 
-        $.ajax({
+        let inputs = [input_name, input_phone, input_user, input_switch];
+
+        inputs.forEach(e => {
+            if (typeof e == "object"){
+
+                alert(typeof e + ": si");
+            }
+        });
+    
+        /*$.ajax({
             type: "POST",
             url: "controller/controller.php",
-            data: {option: "user_repeat"},
+            data: {option: "save_empl", form_new_empl},
             cache: false,
             success: function(result) {
                 users = JSON.parse(result)
@@ -237,7 +270,7 @@ function validate_form() {
             error: function(error) {
                 console.error(error);
             }
-        });
+        });*/
 
     }, false);
 }

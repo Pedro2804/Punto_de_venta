@@ -1,17 +1,14 @@
 <?php session_start();
-    if(!isset($_SESSION["global_user"])){
-        header("Location: ../error.php");
-    }
     
     include("../config/conexion.php");
 
     function login(){
         $pdo = new conexion();
-        $usuario = isset($_POST["user"]) ? $_POST["user"] :  header("Location: ../error.php");
-        $contrasena = isset($_POST["passwd"]) ? md5($_POST["passwd"]) :  header("Location: ../error.php");
+        $user = isset($_POST["user"]) ? $_POST["user"] :  header("Location: ../error.php");
+        $password= isset($_POST["passwd"]) ? md5($_POST["passwd"]) :  header("Location: ../error.php");
 
         $sql = $pdo->conn->prepare("SELECT * FROM usuario WHERE id_usuario = :usuario");
-        $sql->bindParam(":usuario", $usuario);
+        $sql->bindParam(":usuario", $user);
         $sql->execute();
         $row = $sql->fetch(PDO::FETCH_ASSOC);
 
@@ -19,7 +16,7 @@
             $pdo->disconected();
             return 0;
         }
-        if($row["contrasena"] != $contrasena){
+        if($row["contrasena"] != $password){
             $pdo->disconected();
             return 2;
         }
@@ -62,20 +59,21 @@
         return $obj;
     }
 
-    function show($id){
+    function save_empl(){
+        $name = $_POST["name"];
+        return "hola";
+    }
+
+    function show_employ($id){
         $params = array("id" => $id);
         $obj = new stdClass();
         $pdo = new conexion();
         $sql = $pdo->conn->prepare("SELECT * FROM usuario WHERE id_usuario = :id");
         $sql->execute($params);
 
-        $i=0;
-        while($row = $sql->fetch(PDO::FETCH_ASSOC)){
-            $user = array("Usuario" => $row["id_usuario"], "Nombre" => $row["nombre"], "Telefono" => $row["telefono"]);
-            $obj->usuario[$i] = $user;
-            $i++;
-        }
+        $row = $sql->fetch(PDO::FETCH_ASSOC);
+        $obj->user = array( "Nombre" => $row["nombre"], "APP" => $row["ap_paterno"], "APM" => $row["ap_materno"], "Telefono" => $row["telefono"]);
+
         $pdo->disconected();
         return $obj;
     }
-?>
