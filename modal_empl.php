@@ -4,7 +4,7 @@
     }
 ?>
 <!--START MODAL EMPLEADOS-->
-<div class="modal fade" id="modal-empl" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modal-employees" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" style="user-select: none;" >
         <div class="modal-content" style="max-height: 600px;">
             <div class="modal-header text-white" style="background: #808080;" >
@@ -42,7 +42,7 @@
                             <div class="col-md-12 d-none" id="id_user">
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        <img src="img/elementos/person.svg" class="input-group-text">
+                                        <img src="img/elementos/client.svg" class="input-group-text">
                                         <input type="text" class="form-control" id="_user" name="_user" placeholder="" disabled/>
                                     </div>
                                 </div>
@@ -50,49 +50,49 @@
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">N</span>
-                                    <input type="text" class="form-control name" id="name" name="name" placeholder="Nombre" required=""/>
+                                    <input type="text" class="form-control name" id="name" name="name" placeholder="Nombre" required/>
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">P</span>
-                                    <input type="text" class="form-control name" id="first_name" name="first_name" placeholder="Apellido Paterno" required=""/>
+                                    <input type="text" class="form-control name" id="first_name" name="first_name" placeholder="Apellido Paterno" required/>
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">M</span>
-                                    <input type="text" class="form-control name" id="last_name" name="last_name" placeholder="Apellido materno"required=""/>
+                                    <input type="text" class="form-control name" id="last_name" name="last_name" placeholder="Apellido materno" required/>
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <img src="img/elementos/phone.svg" class="input-group-text">
-                                    <input type="tel" class="form-control" maxlength="10" id="phone" name="phone" placeholder="Telefono" required=""/>
+                                    <input type="tel" class="form-control" maxlength="10" id="phone" name="phone" placeholder="Telefono" required/>
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                             <div class="col-md-4" id="div_show_user">
                                 <div class="input-group">
-                                    <img src="img/elementos/person.svg" class="input-group-text">
-                                    <input type="text" class="form-control user" id="user" name="user" placeholder="Usuario" required=""/>
+                                    <img src="img/elementos/client.svg" class="input-group-text">
+                                    <input type="text" class="form-control user" id="user" name="user" placeholder="Usuario" required/>
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class=" mb-3 input-group">
                                     <img src="img/elementos/password.svg" class="input-group-text">
-                                    <input type="password" class="form-control user" id="passwd" name="passwd" placeholder="Contraseña" required=""/>
+                                    <input type="password" class="form-control user" id="passwd" name="passwd" placeholder="Contraseña" required/>
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class=" mb-3 input-group">
                                     <img src="img/elementos/password.svg" class="input-group-text">
-                                    <input type="password" class="form-control user" id="confPasswd" name="confPasswd" placeholder="Confirmar contraseña" required=""/>
+                                    <input type="password" class="form-control user" id="confPasswd" name="confPasswd" placeholder="Confirmar contraseña" required/>
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
@@ -102,32 +102,32 @@
 
                             <div class="col-md-2">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="empl" name="empl">
-                                    <label class="form-check-label" for="empl" checked>Empleados</label>
+                                    <input class="form-check-input" type="checkbox" role="switch" id="switch_employee" name="empl">
+                                    <label class="form-check-label" for="switch_employee" checked>Empleados</label>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="inv" name="inv">
-                                    <label class="form-check-label" for="inv">Inventario</label>
+                                    <input class="form-check-input" type="checkbox" role="switch" id="switch_inventory" name="inv">
+                                    <label class="form-check-label" for="switch_inventory">Inventario</label>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="cat" name="cat">
-                                    <label class="form-check-label" for="cat">Categoria</label>
+                                    <input class="form-check-input" type="checkbox" role="switch" id="switch_client" name="prov">
+                                    <label class="form-check-label" for="switch_client">Clientes</label>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="prov" name="prov">
-                                    <label class="form-check-label" for="prov">Proveedor</label>
+                                    <input class="form-check-input" type="checkbox" role="switch" id="switch_prov" name="prov">
+                                    <label class="form-check-label" for="switch_prov">Proveedores</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="sale" name="sale">
-                                    <label class="form-check-label" for="vent">Ventas</label>
+                                    <input class="form-check-input" type="checkbox" role="switch" id="switch_sale" name="sale">
+                                    <label class="form-check-label" for="switch_sale">Ventas</label>
                                 </div>
                             </div>
 

@@ -3,9 +3,6 @@
     class conexion{
         public $conn;
 
-        /**
-         * Constructed the 'conexion' class to connect to the database.
-         */
         function __construct(){
             $server = "localhost";
             $user = "root";
@@ -17,6 +14,20 @@
                 $this->conn->exec("SET NAMES utf8mb4");
             } catch (Exception $ex) { //catch (\Throwable $th) send EXCEPTION
                 die("PDO Connection Error". $ex->getMessage());
+            }
+        }
+
+        function select($column, $table, $condition, $params){
+            $sql = $this->conn->prepare('SELECT '.$column.' FROM '.$table.' '.$condition);
+            $sql->execute($params);
+            $row = [];
+            while($row[] = $sql->fetch(PDO::FETCH_ASSOC));
+
+            if($row === null){
+                return true;
+            }else{
+                array_pop($row);
+                return $row;
             }
         }
 
@@ -75,42 +86,6 @@
             //echo $query;
             $sql = $this->conn->prepare($query);
             $sql->execute($params);
-        }
-
-        /**
-         * Fuction to select data from the user table.
-         */
-        function select(){
-            $obj = new stdClass();
-            $sql = $this->conn->prepare("SELECT * FROM usuario");
-            $sql->execute();
-
-            $i=0;
-            while($row = $sql->fetch(PDO::FETCH_OBJ)){
-                $obj->user[$i] = $row;
-                $i++;
-            }
-            return $obj;
-        }
-
-        /**
-         * Function to search for duplicate data in the user table.
-         * 
-         * @param int $id User's new ID.
-         * Return TRUE when the ID doesn't exist in the user table.
-         * Return FALSE when the ID exist.
-         */
-        function search($id){
-            $sql = $this->conn->prepare("SELECT id FROM usuario WHERE id=:id");
-            $sql->bindParam(":id", $id);
-            $sql->execute();
-            $row = $sql->fetch(PDO::FETCH_OBJ);
-
-            if($row == null){
-                return true;
-            }else{
-                return false;
-            }
         }
 
         function disconected(){

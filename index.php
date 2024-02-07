@@ -1,4 +1,4 @@
-<?php session_start() ?>
+<?php session_start()?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,7 +7,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="css/sweetalert2.min.css">
     <link rel="stylesheet" href="css/css_bootstrap.min.css">
-    <!--<link rel="preload" href="css/styles.css">-->
+    <!-- <link rel="preload" href="css/styles.css"> -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="img/Elementos/favicon.ico" type="image/x-icon">
 </head>
@@ -19,7 +19,7 @@
         <div class="text-center fs-1 fw-bold" >Login</div>
         <form id="mylogin">
             <div class="mb-3 input-group">
-                <img src="img/elementos/person.svg" class="input-group-text">
+                <img src="img/elementos/client.svg" class="input-group-text">
                 <input type="text" class="form-control" id="user" name="user" placeholder="Usuario" autofocus required/>
             </div>
             <div class=" mb-3 input-group">
@@ -27,14 +27,14 @@
                 <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña" required/>
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="submit" class="btn btn-outline-dark boton" id="login">Iniciar sesión</button>
+                <input type="submit" class="btn btn-outline-dark boton" id="login" value="Iniciar sesión">
             </div>
         </form>
     </div>    
 
     <script src="js/js_bootstrap.bundle.min.js"></script>
     <script src="js/sweetalert2.all.min.js"></script>
-    <script src="js/jquery-3.7.1.min.js"></script>
+    <!-- <script src="js/jquery-3.7.1.min.js"></script> -->
     <script src="js/main.js"></script>
 </body>
 </html>

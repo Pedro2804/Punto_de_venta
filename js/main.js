@@ -1,6 +1,6 @@
 (() => {
     'use strict'
-    const form_mylogin = document.getElementById("mylogin");
+    const form_mylogin = document.querySelector("#mylogin");
     const formInputs = form_mylogin.querySelectorAll('.form-control');
 
     formInputs.forEach(input => {
@@ -10,64 +10,34 @@
     });
 
     form_mylogin.addEventListener('submit', event => {
-        if (!form_mylogin.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-            return;
-        }
-
         event.preventDefault();
-        $.ajax({
-            type: "POST",
-            url: "controller/controller.php",
-            data: {user: $("#user").val(), passwd: $("#passwd").val(), option: "login"},
-            cache: false,
-            success: function(result) {
-                var res = JSON.parse(result);
-                
-                const results = {
-                    0 : function(){
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Usuario incorrecto',
-                                timer: 1500,
-                                showConfirmButton: false
-                            });
-                        },
-                    1 : function(){
-                            window.location.href = 'system.php';
-                            /*Swal.fire({
-                                icon: 'question',
-                                title: '¿Cómo desea acceder?',
-                                confirmButtonText: 'Adminstrador',
-                                cancelButtonText: 'Cajero',
-                                confirmButtonColor: '#ff6600',
-                                cancelButtonColor: '#000000',
-                                iconColor: '#ff6600',
-                                showCloseButton: true,
-                                showConfirmButton: true,
-                                showCancelButton: true
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    window.location.href = 'adm.php';
-                                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                                    window.location.href = 'cajero.php';
-                                };
-                            })*/
-                        },
-                    2 : function(){
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Contraseña incorrecta',
-                                timer: 1500,
-                                showConfirmButton: false
-                            });
-                        }
-                }
-                results[res]();
-                $("#mylogin").trigger("reset");
-                document.getElementById("user").focus();
+        send_form();
+    });
+
+    async function send_form() {
+        let datas = new FormData(form_mylogin);
+        datas.append('option', 'login');
+
+        let cons_server = await fetch("controller/controller.php", { method: "POST", body: datas });
+        let res = await cons_server.json();
+
+        if(typeof res === "string"){
+            formInputs[0].focus();
+            _alert("error", res);
+        }else{
+            if(res){
+                form_mylogin.reset();
+                window.location.href = "system.php";
             }
+        }
+    }
+
+    function _alert(typ, message) {
+        Swal.fire({
+            icon: typ,
+            title: message,
+            timer: 1500,
+            showConfirmButton: false
         });
-    }, false);
+    }
 })();

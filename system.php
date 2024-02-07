@@ -1,6 +1,7 @@
 <?php  session_start();
     if(!isset($_SESSION["global_user"])){
         header("Location: index.php");
+        die();
     }else{
         $online = $_SESSION["global_user"];
     }
@@ -23,32 +24,15 @@
             <div class="fw-bold fs-bold fs-5 m-auto">
                 Le atiende "<?php echo $online; ?>"
             </div>
-            <a class="navbar-brand ms-2 me-4 fs-6 text-white" href="controller/controller.php?option=logout"><img src="img/Elementos/logout.svg" width="25px" title="Cerrar sesión" >
+            <button class="btn navbar-brand ms-2 me-4 fs-6 text-white" id="logout" ><img src="img/Elementos/logout.svg" width="25px" title="Cerrar sesión" >
                 Cerrar sesión
-            </a>
+            </button>
         </div>
     </nav>
     <nav class="navbar navbar-expand-lg" style="background: #808080; user-select: none;">
         <div class="container-fluid">
             <div class="row text-white ms-3">
-                <ul class="navbar-nav mb-3 mb-lg-0">
-                    <li class="nav me-3 menu" id="employees"  style="cursor: pointer;">
-                        <img src="img/Elementos/empleados.svg" alt="" class="d-inline-block align-text-top">
-                        Usuarios
-                    </li>
-                    <li class="nav me-3 menu" id="inventory" style="cursor: pointer;">
-                        <img src="img/Elementos/inventory.svg" alt="" class="d-inline-block align-text-top">
-                        Inventario
-                    </li>
-                    <li class="nav me-3 menu" id="client" style="cursor: pointer;">
-                        <img src="img/Elementos/person.svg" alt="" class="d-inline-block align-text-top">
-                        Clientes
-                    </li>
-                    <li class="nav me-3 menu" id="sales" style="cursor: pointer;">
-                        <img src="img/Elementos/finance.svg" alt="" class="d-inline-block align-text-top">
-                        Ventas
-                    </li>
-                </ul>
+                <ul class="navbar-nav mb-3 mb-lg-0" id="ul_permissions"></ul>
             </div>
         </div>
     </nav>
@@ -61,6 +45,7 @@
     <script src="js/jquery.dataTables.min.js" charset="utf8"></script>
     <script src="js/system.js"></script>
     <script src="js/modal_empl.js"></script>
+    <script>const user_online = <?php echo json_encode($online); ?></script>
     
 </body>
 </html>
