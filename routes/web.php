@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProveedorController;
 
 Route::get('/', function () {
     return view('Auth/login');
@@ -14,6 +15,9 @@ Route::get('/system', [SystemController::class, 'index'])
 
 Route::get('/inventario', [ProductoController::class, 'index'])
      ->middleware('auth')->name('inventario');
+
+Route::get('/proveedores', [ProveedorController::class, 'index'])
+     ->middleware('auth')->name('proveedor');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
