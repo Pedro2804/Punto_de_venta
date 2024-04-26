@@ -54,6 +54,7 @@ class MostrarCategorias extends Component
     }
 
     public function buscar($categoria){
+        $this->resetPage();
         $this->categoria = $categoria;
     }
 
