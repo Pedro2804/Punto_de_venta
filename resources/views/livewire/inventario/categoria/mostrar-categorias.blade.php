@@ -1,4 +1,5 @@
 <div>
+    <!-- Boton para abril el modal -->
     <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md
                     text-white bg-orange-400 hover:text-black hover:bg-orange-500 hover:border-black
                     focus:outline-none transition ease-in-out duration-150 ms-4"
@@ -10,46 +11,28 @@
             <x-icons :src="asset('img/category.svg')" class="h-5" />
         </div>
     </button>
+    <!-- Fin boton para abril el modal -->
 
     <x-modal name="mostrar-categorias" focusable>
-        <header class="bg-orange-500 shadow mt-2">
-            <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8 flex items-center">
+        <header class="bg-orange-500 shadow py-2">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
                 <h2 class="font-semibold text-xl text-gray-200 leading-tight">
                     {{ __('Category').'s'}}
                 </h2>
             </div>
         </header>
 
-        <div class="px-4">
-            <form class="space-y-4" wire:submit.prevent='nuevaCategoria' novalidate>
-                @csrf
-
-                <div class="flex flex-col sm:flex-row">
-                    <div class="w-full sm:w-2/3 sm-4 sm:mb-0">
-                        <x-input-label class="text-white" for="categoria" :value="__('Nueva categoria')" />
-                        <x-text-input
-                            id="categoria"
-                            class="block mt-1 w-full"
-                            type="text"
-                            wire:model="categoria"
-                            :value="old('categoria')"
-                            placeholder="Nueva categoria" />
-                        <x-input-error :messages="$errors->get('categoria')" class="mt-2" />
-                    </div>
-                    <div class="w-full sm:w-1/3 sm:ms-2 mt-4 flex items-center">
-                        <x-primary-button
-                            class="w-full justify-center items-center bg-orange-600 text-white hover:bg-orange-400 ">
-                            {{ __('Save') }}
-                            <x-icons
-                            class="h-5 ms-1"
-                            :src="asset('img/save.svg')" />
-                        </x-primary-button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        <!-- Crear categoria -->
+        <livewire:inventario.categoria.nueva-categoria>
+        <!-- Fin crear s -->
 
         <div class="bg-white m-4 overflow-hidden shadow-sm sm:rounded-lg">
+
+            <!-- Filtrar categorias -->
+            <livewire:inventario.categoria.filtrar-categoria>
+            <!-- Fin filtrar categorias -->
+
+            <!-- Mostrar categorias -->
             <div class="p-4 text-gray-900">
                 @forelse ( $categorias as $categoria)
                     <div class="p-2 bg-white border-b border-gray-200 sm:flex sm:justify-between sm:items-center ">
@@ -72,7 +55,7 @@
                             </button>
 
                             <button 
-                                wire:click="$dispatch('Eliminar', {{$categoria->id}})"
+                                wire:click="$dispatch('Eliminar', {id: {{$categoria->id}}, categoria: '{{$categoria->categoria}}'})"
                                 class="bg-red-600 py-2 px-4 rounded-lg text-white text-xs font-bold uppercase flex justify-center items-center
                                     cursor-pointer hover:bg-red-500" >
                                 <div>{{ __('Delete')}}</div>
@@ -92,6 +75,7 @@
                     {{$categorias->links('vendor.livewire.pagination')}}
                 </div>
             </div>
+            <!-- Fin mostrar categorias -->
         </div>
         <div class="flex items-center justify-center px-4 sm:px-0 mb-4">
             <x-secondary-button x-on:click="$dispatch('close')" class="w-full sm:w-auto justify-center">
@@ -129,9 +113,9 @@
                 allowOutsideClick: () => !Swal.isLoading()
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const newValue = result.value;
+                    const newCategory = result.value;
 
-                    Livewire.dispatch('editarCategoria', [categoria['id'], newValue]);
+                    Livewire.dispatch('editarCategoria', [categoria['id'], newCategory]);
                     Swal.fire({
                         title: "{{__('Cambios guardados')}}",
                         icon: 'success',
@@ -143,9 +127,9 @@
             });
         });
 
-        Livewire.on('Eliminar', (categoriaId) => {
+        Livewire.on('Eliminar', (categoria) => {
             Swal.fire({
-                title: "{{__('Are you sure?')}}",
+                title: '¿Está seguro de eliminar '+categoria['categoria']+'?',
                 text: "{{__('You won\'t be able to revert this!')}}",
                 icon: 'warning',
                 showCancelButton: true,
@@ -155,7 +139,7 @@
                 cancelButtonText: "{{__('Cancel')}}"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.dispatch('eliminarCategoria', [categoriaId]);
+                    Livewire.dispatch('eliminarCategoria', [categoria['id']]);
                     
                     Swal.fire({
                         title: "{{__('Deleted!')}}",

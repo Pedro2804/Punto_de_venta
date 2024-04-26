@@ -11,37 +11,30 @@ class MostrarCategorias extends Component
     use WithPagination;
     
     protected $listeners = [
-                            'nuevaCategoria',
+                            'nuevaCategoria' => 'nueva',
                             'editarCategoria',
-                            'eliminarCategoria'
+                            'eliminarCategoria',
+                            'busqueda' => 'buscar'
                         ];
 
-    public $categoria;
+    public $categoria = '';
 
-    protected $rules = [
-        'categoria' => 'required|string'
-    ];
-
-    public function nuevaCategoria(){
-        $datos = $this->validate();
-
+    public function nueva($categoria){
         try {
             Categoria::create([
-                'categoria' => $datos['categoria']
+                'categoria' => $categoria
             ]);
-
-            $this->reset('categoria');
             $this->resetPage();
         } catch (\Exception $e) {
             dd($e);
         }
     }
 
-    public function editarCategoria($id, $name){
-        if($name !== ''){
+    public function editarCategoria($categoriaId, $categoria){
+        if($categoria !== ''){
             try{
-                $category = Categoria::find($id);
-                $category->categoria = $name;
+                $category = Categoria::find($categoriaId);
+                $category->categoria = $categoria;
                 $category->save();
                 $this->resetPage();
             }catch(\Exception $e){
@@ -50,9 +43,9 @@ class MostrarCategorias extends Component
         }
     }
 
-    public function eliminarCategoria($id){
+    public function eliminarCategoria($categoriaId){
         try{
-            $category = Categoria::find($id);
+            $category = Categoria::find($categoriaId);
             $category->delete();
             $this->resetPage();
         }catch(\Exception $e){
@@ -60,9 +53,19 @@ class MostrarCategorias extends Component
         }
     }
 
+    public function buscar($categoria){
+        $this->categoria = $categoria;
+    }
+
     public function render()
     {
-        $categorias = Categoria::latest()->paginate(5);
+        if($this->categoria !== ''){
+            $categorias = Categoria::when($this->categoria, function($query) {
+                $query->where('categoria', 'LIKE', "%".$this->categoria."%");
+            })->paginate(5);
+        }else{
+            $categorias = Categoria::latest()->paginate(5);
+        }
 
         return view('livewire.inventario.categoria.mostrar-categorias', [
             'categorias' => $categorias
