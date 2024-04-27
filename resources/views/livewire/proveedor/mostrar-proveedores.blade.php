@@ -79,3 +79,34 @@
         {{$proveedores->links('vendor.livewire.pagination')}}
     </div>
 </div>
+
+@push('scripts')
+    <script src="{{asset('js/sweetalert2@11.js')}}"></script>
+    
+    <script>
+        Livewire.on('Eliminar', (proveedor) => {
+            Swal.fire({
+                title: '¿Está seguro de eliminar '+proveedor['empresa']+'?',
+                text: "{{__('You won\'t be able to revert this!')}}",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1e40af',
+                cancelButtonColor: '#dc2626',
+                confirmButtonText: "{{__('Confirm')}}",
+                cancelButtonText: "{{__('Cancel')}}"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('eliminarProveedor', [proveedor['id']]);
+                    
+                    Swal.fire({
+                        title: "{{__('Deleted!')}}",
+                        text: "{{__(':name has been deleted.', ['name' => 'El proveedor'])}}",
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        });
+    </script>
+@endpush

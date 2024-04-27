@@ -13,7 +13,7 @@ class MostrarProveedores extends Component
     protected $listeners = [
                             'nuevoProveedor' => 'nuevo',
                             'editarCategoria',
-                            'eliminarCategoria',
+                            'eliminarProveedor',
                             'busqueda' => 'buscar'
                         ];
 
@@ -32,6 +32,17 @@ class MostrarProveedores extends Component
             dd($e);
         }
     }
+
+    public function eliminarProveedor($proveedorId){
+        try{
+            $proveedor = Proveedor::find($proveedorId);
+            $proveedor->delete();
+            $this->resetPage();
+        }catch(\Exception $e){
+            dd($e);
+        }
+    }
+
     public function render()
     {
         $proveedores = Proveedor::latest()->paginate(5);
