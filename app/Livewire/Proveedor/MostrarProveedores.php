@@ -9,12 +9,15 @@ use Livewire\WithPagination;
 class MostrarProveedores extends Component
 {
     use WithPagination;
-
-    protected $listeners = ['nuevoProveedor' => 'nuevo'];
+    
+    protected $listeners = [
+                            'nuevoProveedor' => 'nuevo',
+                            'editarCategoria',
+                            'eliminarCategoria',
+                            'busqueda' => 'buscar'
+                        ];
 
     public function nuevo($proveedor){
-        dd($proveedor);
-        
         try {
             Proveedor::create([
                 'empresa' => $proveedor['empresa'],
@@ -23,15 +26,17 @@ class MostrarProveedores extends Component
                 'telefono' => $proveedor['telefono'],
                 'direccion' => $proveedor['direccion']
             ]);
-            //$this->resetPage();
             $this->dispatch('close-modal', 'nuevo-proveedor');
+            $this->resetPage();
         } catch (\Exception $e) {
             dd($e);
         }
     }
-    
     public function render()
     {
-        return view('livewire.proveedor.mostrar-proveedores');
+        $proveedores = Proveedor::latest()->paginate(5);
+        return view('livewire.proveedor.mostrar-proveedores', [
+            'proveedores' => $proveedores
+        ]);
     }
 }

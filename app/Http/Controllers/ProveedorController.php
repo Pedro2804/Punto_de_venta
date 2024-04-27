@@ -11,7 +11,7 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        return view('livewire.proveedor.mostrar-proveedores');
+        return view('system.proveedor.index');
     }
 
     /**

@@ -32,22 +32,8 @@ class NuevoProveedor extends Component
             'direccion' => $this->direccion !== null ? trim($this->direccion) : $this->direccion
         ];        
 
-        try {
-            Proveedor::create([
-                'empresa' => $proveedor['empresa'],
-                'representante' => $proveedor['representante'],
-                'correo' => $proveedor['correo'],
-                'telefono' => $proveedor['telefono'],
-                'direccion' => $proveedor['direccion']
-            ]);
-            //$this->resetPage();
-            $this->reset();
-            $this->dispatch('close-modal', 'nuevo-proveedor');
-        } catch (\Exception $e) {
-            dd($e);
-        }
-        // $this->dispatch('nuevoProveedor', $proveedor);
-        // $this->reset();
+        $this->dispatch('nuevoProveedor', $proveedor);
+        $this->reset();
     }
 
     public function render()
