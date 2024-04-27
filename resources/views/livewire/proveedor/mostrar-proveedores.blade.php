@@ -3,8 +3,11 @@
         <h2 class="font-semibold text-xl text-gray-200 leading-tight">
             {{ __('Proveedores') }}
         </h2>
-        {{-- <livewire:inventario.nuevo-producto /> --}}
-        {{-- <livewire:inventario.categoria.mostrar-categorias /> --}}
+
+        {{--modal Proveedor--}}
+            <livewire:proveedor.nuevo-proveedor />
+        {{--End modal Proveedor--}}
+
     </x-slot>
 
     <div class="py-10">
