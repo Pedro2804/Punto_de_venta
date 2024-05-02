@@ -47,10 +47,11 @@
             </div>
 
             <div class="flex flex-col md:flex-row items-stretch md:justify-center gap-3 mt-2 md:mt-0 md:w-1/4">
-                <button 
-                    wire:click="$dispatch('Editar', {{$proveedor}})"
+                
+                <button
                     class="bg-blue-800 py-2 px-4 rounded-lg text-white text-xs font-bold uppercase flex justify-center items-center
-                    cursor-pointer hover:bg-blue-700" >
+                        cursor-pointer hover:bg-blue-700" 
+                        wire:click="$dispatch('abrirModal', [{{$proveedor->id}}])" >
                     <div>{{ __('Edit')}}</div>
 
                     <div class="ms-1">
@@ -78,12 +79,29 @@
     <div class="flex justify-center mt-2">
         {{$proveedores->links('vendor.livewire.pagination')}}
     </div>
+
+    <x-modal name="editar-proveedor" focusable>
+        @if($provSeleccionado)
+            <livewire:proveedor.editar-proveedor :proveedor="$provSeleccionado" />
+        @endif
+    </x-modal>
 </div>
 
 @push('scripts')
     <script src="{{asset('js/sweetalert2@11.js')}}"></script>
     
     <script>
+
+        Livewire.on('mensaje', param => {
+            Swal.fire({
+                title: param[0]['title'],
+                text: param[0]['messaje'],
+                icon: param[0]['icon'],
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
+
         Livewire.on('Eliminar', (proveedor) => {
             Swal.fire({
                 title: '¿Está seguro de eliminar '+proveedor['empresa']+'?',
@@ -98,13 +116,10 @@
                 if (result.isConfirmed) {
                     Livewire.dispatch('eliminarProveedor', [proveedor['id']]);
                     
-                    Swal.fire({
-                        title: "{{__('Deleted!')}}",
-                        text: "{{__(':name has been deleted.', ['name' => 'El proveedor'])}}",
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                    Livewire.dispatch('mensaje', [{
+                                                    'icon': 'success',
+                                                    'title': 'Eliminado!',
+                                                    'messaje': 'El proveedor ha sido eliminado'}]);
                 }
             });
         });

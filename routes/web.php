@@ -17,7 +17,7 @@ Route::get('/inventario', [ProductoController::class, 'index'])
      ->middleware('auth')->name('inventario');
 
 Route::get('/proveedores', [ProveedorController::class, 'index'])
-     ->middleware('auth')->name('proveedor');
+     ->middleware('auth')->name('proveedor.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
