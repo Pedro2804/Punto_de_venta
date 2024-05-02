@@ -27,13 +27,15 @@ class NuevoProveedor extends Component
         $proveedor =[
             'empresa' => trim($this->empresa),
             'representante' => trim($this->representante),
-            'correo' => $this->correo !== null ? trim($this->correo) : $this->correo,
-            'telefono' => $this->telefono !== null ? trim($this->telefono) : $this->telefono,
-            'direccion' => $this->direccion !== null ? trim($this->direccion) : $this->direccion
+            'correo' => $this->correo !== null && $this->correo !== '' ? trim($this->correo) : null,
+            'telefono' => $this->telefono !== null && $this->telefono !== '' ? trim($this->telefono) : null,
+            'direccion' => $this->direccion !== null && $this->direccion !== '' ? trim($this->direccion) : null
         ];        
 
         $this->dispatch('nuevoProveedor', $proveedor);
+        $this->dispatch('close-modal', 'nuevo-proveedor');
         $this->reset();
+        $this->dispatch('mensaje', ['icon' => 'success', 'title' => 'Guardado!', 'messaje' => 'Proveedor registrado correctamente']);
     }
 
     public function render()

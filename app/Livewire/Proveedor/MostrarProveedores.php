@@ -30,7 +30,6 @@ class MostrarProveedores extends Component
                 'direccion' => $proveedor['direccion']
             ]);
 
-            $this->dispatch('close-modal', 'nuevo-proveedor');
             $this->resetPage();
         } catch (\Exception $e) {
             dd($e);
