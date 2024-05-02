@@ -10,6 +10,7 @@ class MostrarProveedores extends Component
 {
     use WithPagination;
     public $provSeleccionado = null;
+    public $proveedor = '';
     
     protected $listeners = [
                             'nuevoProveedor',
@@ -66,6 +67,11 @@ class MostrarProveedores extends Component
         }
     }
 
+    public function busqueda($proveedor){
+        $this->resetPage();
+        $this->proveedor = $proveedor;
+    }
+
     public function abrirModal($provSeleccionado){
         $this->provSeleccionado = Proveedor::find($provSeleccionado);
         $this->dispatch('open-modal', 'editar-proveedor');
@@ -78,7 +84,14 @@ class MostrarProveedores extends Component
 
     public function render()
     {
-        $proveedores = Proveedor::latest()->paginate(5);
+        if($this->proveedor !== ''){
+            $proveedores = Proveedor::when($this->proveedor, function($query) {
+                $query->where('empresa', 'LIKE', "%".$this->proveedor."%");
+            })->paginate(5);
+        }else{
+            $proveedores = Proveedor::latest()->paginate(5);
+        }
+
         return view('livewire.proveedor.mostrar-proveedores', [
             'proveedores' => $proveedores
         ]);

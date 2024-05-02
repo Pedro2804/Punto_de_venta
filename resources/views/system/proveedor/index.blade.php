@@ -14,6 +14,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4 text-gray-900">
+                    <livewire:proveedor.filtrar-proveedor />
                     <div class="bg-white m-4 overflow-hidden shadow-sm sm:rounded-lg">
                         <livewire:proveedor.mostrar-proveedores />
                     </div>
