@@ -78,7 +78,7 @@
             <!-- Fin mostrar categorias -->
         </div>
         <div class="flex items-center justify-center px-4 sm:px-0 mb-4">
-            <x-secondary-button x-on:click="$dispatch('close')" class="w-full sm:w-auto justify-center">
+            <x-secondary-button x-on:click="$dispatch('close-modal', 'mostrar-categorias')" class="w-full sm:w-auto justify-center">
                 {{ __('Close') }}
             </x-secondary-button>
         </div>
@@ -89,6 +89,16 @@
     <script src="{{asset('js/sweetalert2@11.js')}}"></script>
     
     <script>
+        Livewire.on('mensaje', param => {
+            Swal.fire({
+                title: param[0]['title'],
+                text: param[0]['messaje'],
+                icon: param[0]['icon'],
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
+        
         Livewire.on('Editar', (categoria) => {
             Swal.fire({
                 title: "{{__('Edit :name', ['name' => 'Categoría'])}}",
@@ -116,12 +126,10 @@
                     const newCategory = result.value;
 
                     Livewire.dispatch('editarCategoria', [categoria['id'], newCategory]);
-                    Swal.fire({
-                        title: "{{__('Cambios guardados')}}",
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                    Livewire.dispatch('mensaje', [{
+                                                    'icon': 'success',
+                                                    'title': 'Guardado!',
+                                                    'messaje': 'Cambios guardados correctamente'}]);
                     
                 }
             });
@@ -141,13 +149,10 @@
                 if (result.isConfirmed) {
                     Livewire.dispatch('eliminarCategoria', [categoria['id']]);
                     
-                    Swal.fire({
-                        title: "{{__('Deleted!')}}",
-                        text: "{{__(':name has been deleted.', ['name' => 'La categoria'])}}",
-                        icon: 'success', //Icono del sweetalert
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                    Livewire.dispatch('mensaje', [{
+                                                    'icon': 'success',
+                                                    'title': 'Eliminado!',
+                                                    'messaje': 'La categoría ha sido eliminada'}]);
                 }
             });
         });
