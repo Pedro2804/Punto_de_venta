@@ -11,7 +11,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        return view('livewire/inventario/mostrar-productos');
+        return view('system/inventario/index');
     }
 
     /**

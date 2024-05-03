@@ -15,11 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('sku')->unique();
-            $table->string('descripcion');
+            $table->foreignId('categoria_id')->constrained()->onDelete('cascade');
+            $table->string('descripcion')->nullable();
             $table->string('precio_compra');
             $table->string('precio_venta');
             $table->string('stock');
             $table->string('stock_min');
+            $table->foreignId('proveedor_id')->constrained('proveedores')->onDelete('cascade');
+            $table->string('imagen')->nullable();
             $table->timestamps();
         });
     }

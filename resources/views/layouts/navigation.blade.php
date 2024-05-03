@@ -15,7 +15,7 @@
                     <x-nav-link :href="route('system')" :active="request()->routeIs('system')">
                         {{ __('Caja') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('inventario')" :active="request()->routeIs('inventario')">
+                    <x-nav-link :href="route('inventario.index')" :active="request()->routeIs('inventario.index')">
                         <x-icons :src="asset('img/inventory.svg')" class="h-8 me-1" />
                         {{ __('Inventory') }}
                     </x-nav-link>
@@ -89,7 +89,7 @@
             <x-responsive-nav-link :href="route('system')" :active="request()->routeIs('system')">
                 {{ __('Caja') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('inventario')" :active="request()->routeIs('inventario')">
+            <x-responsive-nav-link :href="route('inventario.index')" :active="request()->routeIs('inventario.index')">
                 {{ __('Inventory') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('proveedor.index')" :active="request()->routeIs('proveedor.index')">

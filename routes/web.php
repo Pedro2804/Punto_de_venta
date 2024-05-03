@@ -14,7 +14,7 @@ Route::get('/system', [SystemController::class, 'index'])
     ->middleware(['auth', 'verified'])->name('system');
 
 Route::get('/inventario', [ProductoController::class, 'index'])
-     ->middleware('auth')->name('inventario');
+     ->middleware('auth')->name('inventario.index');
 
 Route::get('/proveedores', [ProveedorController::class, 'index'])
      ->middleware('auth')->name('proveedor.index');

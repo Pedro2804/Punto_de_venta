@@ -24,6 +24,8 @@ class MostrarCategorias extends Component
             Categoria::create([
                 'categoria' => $categoria
             ]);
+            
+            $this->dispatch('cargar');
             $this->dispatch('mensaje', ['icon' => 'success', 'title' => 'Guardado!', 'messaje' => 'Categoría registrado correctamente']);
             $this->resetPage();
         } catch (\Exception $e) {
