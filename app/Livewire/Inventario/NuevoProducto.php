@@ -92,7 +92,7 @@ class NuevoProducto extends Component
     }
 
     public function buscarCategoria(){
-        if($this->validateOnly('categoria_id') && $this->categoria_id !== ''){
+        if($this->categoria_id !== ''){
             $categoria = Categoria::find($this->categoria_id);
             if($categoria !== null){
                 $this->nameCategoria = $categoria->categoria;
@@ -100,11 +100,14 @@ class NuevoProducto extends Component
                 $this->addError('categoria_id', 'La categoria no existe.');
                 $this->nameCategoria = '';
             }
+        }else{
+            $this->removeError('categoria_id', 'La categoria no existe.');
+            $this->nameCategoria = '';
         }
     }
 
     public function buscarProveedor(){
-        if($this->validateOnly('proveedor_id') && $this->proveedor_id !== ''){
+        if($this->proveedor_id !== ''){
             $proveedor = Proveedor::find($this->proveedor_id);
             if($proveedor !== null){
                 $this->nameProveedor = $proveedor->empresa;
