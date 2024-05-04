@@ -19,10 +19,9 @@ class NuevoProducto extends Component
     public $name;
     public $sku;
 
-    #[Validate('required|numeric', onUpdate: false,  as: 'categoria')]
+    #[Validate(as: 'Categoria')]
     public $categoria_id;
     public $nameCategoria;
-    
     public $descripcion;
     public $precio_compra;
     public $precio_venta;
@@ -30,10 +29,9 @@ class NuevoProducto extends Component
     public $stock;
     public $stock_min;
     
-    #[Validate('required|numeric', onUpdate: false,  as: 'proveedor')]
+    #[Validate(as: 'Proveedor')]
     public $proveedor_id;
     public $nameProveedor;
-
     public $imagen;
 
     protected $listeners = [
@@ -44,15 +42,15 @@ class NuevoProducto extends Component
                         ];
 
     protected $rules = [
-                        'name' => 'required|string',
-                        'sku' => 'required|string',
-                        //'categoria_id' => 'required|numeric',
+                        'name' => 'required|string|',
+                        'sku' => 'required|string|unique:'.Producto::class,
+                        'categoria_id' => 'required|numeric|exists:categorias,id',
                         'descripcion' => 'nullable|string|max:512',
                         'precio_compra' => 'required|numeric|min:0',
                         'precio_venta' => 'required|numeric|min:0',
                         'stock' => 'required|numeric|min:0',
                         'stock_min' => 'nullable|numeric|min:10',
-                        //'proveedor_id' => 'required|numeric',
+                        'proveedor_id' => 'required|numeric|exists:proveedores,id',
                         'imagen' => 'nullable|string|max:1024'
                     ];
 
@@ -86,6 +84,10 @@ class NuevoProducto extends Component
                 'proveedor_id' => $datos['proveedor_id'],
                 'imagen' => $datos['imagen']
             ]);
+
+            $this->dispatch('mensaje', ['icon' => 'success', 'title' => 'Guardado!', 'messaje' => 'Producto registrado correctamente']);
+            $this->reset();
+
         } catch (\Exception $e) {
             dd($e);
         }
@@ -97,13 +99,12 @@ class NuevoProducto extends Component
             if($categoria !== null){
                 $this->nameCategoria = $categoria->categoria;
             }else{
-                $this->addError('categoria_id', 'La categoria no existe.');
-                $this->nameCategoria = '';
+                $this->reset('nameCategoria');
             }
         }else{
-            $this->removeError('categoria_id', 'La categoria no existe.');
-            $this->nameCategoria = '';
+            $this->reset('nameCategoria');
         }
+        $this->resetErrorBag();
     }
 
     public function buscarProveedor(){
@@ -112,10 +113,13 @@ class NuevoProducto extends Component
             if($proveedor !== null){
                 $this->nameProveedor = $proveedor->empresa;
             }else{
-                $this->addError('proveedor_id', 'El proveedor no existe.');
-                $this->nameProveedor = '';
+                $this->reset('nameProveedor');
             }
+        }else{
+            $this->reset('nameProveedor');
         }
+
+        $this->resetErrorBag();
     }
 
     public function calcularPrecio(){

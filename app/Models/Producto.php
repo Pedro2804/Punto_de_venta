@@ -13,15 +13,20 @@ class Producto extends Model
         'name',
         'sku',
         'categoria_id',
-        'descriion',
-        'precioompra',
-        'precioenta',
+        'descripcion',
+        'precio_compra',
+        'precio_venta',
         'stock',
-        'stock_n',
-        'proveedor_id'
+        'stock_min',
+        'proveedor_id',
+        'imagen'
     ];
 
     public function categoria(){
         return $this->belongsTo(Categoria::class);
+    }
+
+    public function proveedor(){
+        return $this->belongsTo(Proveedor::class);
     }
 }
