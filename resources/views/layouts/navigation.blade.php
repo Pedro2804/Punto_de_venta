@@ -13,17 +13,19 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('system')" :active="request()->routeIs('system')">
+                        <x-icons :src="asset('img/point-of-sale.svg')" class="h-8 me-1" />
                         {{ __('Caja') }}
                     </x-nav-link>
                     <x-nav-link :href="route('inventario.index')" :active="request()->routeIs('inventario.index')">
-                        <x-icons :src="asset('img/inventory.svg')" class="h-8 me-1" />
+                        <x-icons :src="asset('img/inventory2.svg')" class="h-8 me-1" />
                         {{ __('Inventory') }}
                     </x-nav-link>
                     <x-nav-link :href="route('proveedor.index')" :active="request()->routeIs('proveedor.index')">
-                        <x-icons :src="asset('img/proveedor.svg')" class="h-8 me-1" />
+                        <x-icons :src="asset('img/localShope.svg')" class="h-8 me-1" />
                         {{ __('Proveedor') }}
                     </x-nav-link>
                     <x-nav-link :href="route('system')" :active="request()->routeIs('/')">
+                        <x-icons :src="asset('img/manageAccount.svg')" class="h-8 me-1" />
                         {{ __('Users') }}
                     </x-nav-link>
                 </div>

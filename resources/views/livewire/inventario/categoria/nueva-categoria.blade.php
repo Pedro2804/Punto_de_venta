@@ -20,7 +20,7 @@
                     {{ __('Save') }}
                     <x-icons
                     class="h-5 ms-1"
-                    :src="asset('img/save.svg')" />
+                    :src="asset('img/save2.svg')" />
                 </x-primary-button>
             </div>
         </div>

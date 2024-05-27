@@ -8,7 +8,7 @@
         <div>{{ __('Category').'s'}}</div>
 
         <div class="ms-1">
-            <x-icons :src="asset('img/category.svg')" class="h-5" />
+            <x-icons :src="asset('img/tools.svg')" class="h-5" />
         </div>
     </button>
     <!-- Fin boton para abril el modal -->

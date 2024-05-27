@@ -205,7 +205,7 @@
         <div class="flex flex-col sm:flex-row mt-4 justify-center">
             <x-primary-button
                 class="w-full sm:w-auto sm-4 sm:mb-0
-                        justify-center bg-orange-600 text-white hover:bg-orange-400 ">
+                        justify-center">
                 {{ __('Save') }}
             </x-primary-button>
             <x-secondary-button x-on:click="$dispatch('close-modal', 'nuevo-producto')" class="w-full sm:w-auto sm:ms-2 sm:mt-0 mt-4 justify-center">
