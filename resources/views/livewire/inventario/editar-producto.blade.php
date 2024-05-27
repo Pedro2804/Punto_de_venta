@@ -1,8 +1,8 @@
 <div class="p-4">
     <h2 class="text-white bg-orange-400 text-center font-bold p-2 text-xl rounded-xl">
-        {{__('New :name', ['name' => 'producto'])}}
+        {{__('Edit :name', ['name' => 'producto'])}}
     </h2>
-    <form wire:submit.prevent='nuevoProducto' novalidate>
+    <form wire:submit.prevent='editarProducto' novalidate>
         @csrf
 
         <!-- Name -->
@@ -90,7 +90,7 @@
                         type="number"
                         wire:model="precio_compra"
                         x-on:input="$dispatch('calcularPrecio')"
-                        :value="old('precio_compra')"
+                        :value="0"
                         min="0"
                         placeholder="Precio de compra" />
                     <x-input-error :messages="$errors->get('precio_compra')" class="mt-2" />
@@ -191,24 +191,32 @@
         </div>
 
         <div class="mt-4">
-            <x-input-label class="text-white" for="imagen" :value="__('Image')" />
-            <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="imagen" accept="image/*"/>
+            <x-input-label class="text-white" for="imagen_nueva" :value="__('Image')" />
+            <x-text-input id="imagen_nueva" class="block mt-1 w-full" type="file" wire:model="imagen_nueva" accept="image/*"/>
+
             <div class="my-5 w-80">
+                <x-input-label :value="__('Image').' actual'" class="text-white"/>
                 @if ($imagen)
-                    <spam class="text-white" >Imagen:</spam>
-                    <img src="{{$imagen->temporaryUrl()}}" alt="">
+                    <img src="{{asset('storage/img/productos').'/'.$imagen}}" alt="" class="text-white" />
                 @endif
             </div>
-            <x-input-error :messages="$errors->get('imagen')" class="mt-2" />
+
+            <div class="my-5 w-80">
+                @if ($imagen_nueva)
+                    <x-input-label :value="__('Image').' nueva'" class="text-white"/>
+                    <img src="{{$imagen_nueva->temporaryUrl()}}" alt="">
+                @endif
+            </div>
+            <x-input-error :messages="$errors->get('imagen_nueva')" class="mt-2" />
         </div>
 
         <div class="flex flex-col sm:flex-row mt-4 justify-center">
             <x-primary-button
                 class="w-full sm:w-auto sm-4 sm:mb-0
-                        justify-center">
+                        justify-center bg-orange-600 text-white hover:bg-orange-400 ">
                 {{ __('Save') }}
             </x-primary-button>
-            <x-secondary-button x-on:click="$dispatch('close-modal', 'nuevo-producto')" class="w-full sm:w-auto sm:ms-2 sm:mt-0 mt-4 justify-center">
+            <x-secondary-button x-on:click="$dispatch('cerrarModal')" class="w-full sm:w-auto sm:ms-2 sm:mt-0 mt-4 justify-center">
                 {{ __('Cancel') }}
             </x-secondary-button>
         </div>
