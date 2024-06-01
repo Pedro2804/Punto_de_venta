@@ -1,5 +1,8 @@
 <div class="text-gray-900">
-    <div class="bg-white mb-4 hidden md:flex">
+    <!-- Filtrar productos -->
+    <livewire:inventario.filtrar-producto>
+    <!-- Fin filtrar productoa -->
+    <div class="bg-white mb-4 mt-2 hidden md:flex">
         <div class="bg-gray-200 w-1/5">
             <p class="text-2xl font-bold text-center">
                 {{__('SKU')}}
