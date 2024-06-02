@@ -11,21 +11,21 @@ class MostrarCategorias extends Component
     use WithPagination;
     
     protected $listeners = [
-                            'nuevaCategoria' => 'nueva',
+                            'nuevaCategoria',
                             'editarCategoria',
                             'eliminarCategoria',
-                            'busqueda' => 'buscar'
+                            'filtrarCategoria_mostrar'
                         ];
 
-    public $categoria = '';
+    public $filtrar_categoria = '';
 
-    public function nueva($categoria){
+    public function nuevaCategoria($nueva_categoria){
         try {
             Categoria::create([
-                'categoria' => $categoria
+                'categoria' => $nueva_categoria
             ]);
             
-            $this->dispatch('cargar');
+            $this->dispatch('actualizar_lista_cat_prov');
             $this->dispatch('mensaje', ['icon' => 'success', 'title' => 'Guardado!', 'messaje' => 'Categoría registrado correctamente']);
             $this->resetPage();
         } catch (\Exception $e) {
@@ -33,11 +33,11 @@ class MostrarCategorias extends Component
         }
     }
 
-    public function editarCategoria($categoriaId, $categoria){
-        if($categoria !== ''){
+    public function editarCategoria($categoriaId, $categoria_nueva){
+        if($categoria_nueva !== ''){
             try{
                 $category = Categoria::find($categoriaId);
-                $category->categoria = $categoria;
+                $category->categoria = $categoria_nueva;
                 $category->save();
                 $this->resetPage();
             }catch(\Exception $e){
@@ -46,9 +46,9 @@ class MostrarCategorias extends Component
         }
     }
 
-    public function eliminarCategoria($categoriaId){
+    public function eliminarCategoria($categoriaId_eliminar){
         try{
-            $category = Categoria::find($categoriaId);
+            $category = Categoria::find($categoriaId_eliminar); 
             $category->delete();
             $this->resetPage();
         }catch(\Exception $e){
@@ -56,16 +56,16 @@ class MostrarCategorias extends Component
         }
     }
 
-    public function buscar($categoria){
+    public function filtrarCategoria_mostrar($filtrar_categoria){
         $this->resetPage();
-        $this->categoria = $categoria;
+        $this->filtrar_categoria = $filtrar_categoria;
     }
 
     public function render()
     {
-        if($this->categoria !== ''){
-            $categorias = Categoria::when($this->categoria, function($query) {
-                $query->where('categoria', 'LIKE', "%".$this->categoria."%");
+        if($this->filtrar_categoria !== ''){
+            $categorias = Categoria::when($this->filtrar_categoria, function($query) {
+                $query->where('categoria', 'LIKE', "%".$this->filtrar_categoria."%");
             })->paginate(5);
         }else{
             $categorias = Categoria::latest()->paginate(5);

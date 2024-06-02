@@ -6,16 +6,16 @@ use Livewire\Component;
 
 class NuevaCategoria extends Component
 {
-    public $categoria;
+    public $nueva_categoria;
 
     protected $rules = [
-        'categoria' => 'required|string'
+        'nueva_categoria' => 'required|string'
     ];
 
     public function nuevaCategoria(){
         $this->validate();
-        $this->dispatch('nuevaCategoria', trim($this->categoria));
-        $this->reset('categoria');
+        $this->dispatch('nuevaCategoria', trim($this->nueva_categoria));
+        $this->reset('nueva_categoria');
     }
 
     public function render()

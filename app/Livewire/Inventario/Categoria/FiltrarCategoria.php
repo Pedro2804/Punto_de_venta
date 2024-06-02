@@ -6,18 +6,11 @@ use Livewire\Component;
 
 class FiltrarCategoria extends Component
 {
-    public $categoria;
+    public $filtrar_categoria;
 
-    protected $listeners = [
-        'filtrarEntrada'
-    ];
-
-    public function datosAfiltrar(){
-        $this->dispatch('busqueda', trim($this->categoria));
-    }
-
-    public function filtrarEntrada(){
-        $this->dispatch('busqueda', trim($this->categoria));
+    public function updatedFiltrarCategoria()
+    {
+        $this->dispatch('filtrarCategoria_mostrar', trim($this->filtrar_categoria));
     }
 
     public function render()

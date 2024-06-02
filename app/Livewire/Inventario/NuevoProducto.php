@@ -35,7 +35,7 @@ class NuevoProducto extends Component
     public $imagen;
 
     protected $listeners = [
-                            'cargar',
+                            'actualizar_lista_cat_prov',
                             'calcularPrecio',
                             'buscarCategoria',
                             'buscarProveedor',
@@ -116,15 +116,14 @@ class NuevoProducto extends Component
     }
 
     // Cargar los datos cuando se crea uno nuevo 
-    public function cargar(){
+    public function actualizar_lista_cat_prov(){
         $this->categorias = Categoria::all();
         $this->proveedores = Proveedor::all();
     }
 
     public function render()
     {
-        $this->categorias = Categoria::all();
-        $this->proveedores = Proveedor::all();
+        $this->actualizar_lista_cat_prov();
 
         return view('livewire.inventario.nuevo-producto', [
             'categorias' => $this->categorias,

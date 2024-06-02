@@ -11,17 +11,15 @@ class FiltrarProducto extends Component
     public $categorias;
     public $proveedores;
     public $categoria_id;
+    public $por_categoria;
 
     protected $listeners = [
-        'filtrarEntrada'
+        'filtrarProductos'
     ];
 
-    public function datosAfiltrar(){
-        $this->dispatch('busqueda', trim($this->categoria));
-    }
-
-    public function filtrarEntrada(){
-        $this->dispatch('busqueda', trim($this->categoria));
+    public function filtrarProductos(){
+        dd($this->por_categoria);
+        $this->dispatch('busqueda', trim($this->por_categoria));
     }
 
     public function render()

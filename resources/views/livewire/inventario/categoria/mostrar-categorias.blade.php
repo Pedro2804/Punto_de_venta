@@ -23,8 +23,13 @@
         </header>
 
         <!-- Crear categoria -->
-        <livewire:inventario.categoria.nueva-categoria>
+        {{-- <livewire:inventario.categoria.nueva-categoria> --}}
         <!-- Fin crear s -->
+
+        <div class="bg-white m-4 overflow-hidden shadow-sm sm:rounded-lg p-4 text-gray-900">
+            {{-- <livewire:tablas.categoria-table /> --}}
+        </div>
+        {{--
 
         <div class="bg-white m-4 overflow-hidden shadow-sm sm:rounded-lg">
 
@@ -44,7 +49,7 @@
 
                         <div class="flex flex-col sm:flex-row items-stretch gap-3 mt-4 sm:mt-0">
                             <button 
-                                wire:click="$dispatch('Editar', {id: {{$categoria->id}}, categoria: '{{$categoria->categoria}}'})"
+                                wire:click="$dispatch('Editar', {id_edit: {{$categoria->id}}, categoria_edit: '{{$categoria->categoria}}'})"
                                 class="bg-blue-800 py-2 px-4 rounded-lg text-white text-xs font-bold uppercase flex justify-center items-center
                                 cursor-pointer hover:bg-blue-700" >
                                 <div>{{ __('Edit')}}</div>
@@ -55,7 +60,7 @@
                             </button>
 
                             <button 
-                                wire:click="$dispatch('Eliminar', {id: {{$categoria->id}}, categoria: '{{$categoria->categoria}}'})"
+                                wire:click="$dispatch('Eliminar', {id_delete: {{$categoria->id}}, categoria_delete: '{{$categoria->categoria}}'})"
                                 class="bg-red-600 py-2 px-4 rounded-lg text-white text-xs font-bold uppercase flex justify-center items-center
                                     cursor-pointer hover:bg-red-500" >
                                 <div>{{ __('Delete')}}</div>
@@ -76,7 +81,7 @@
                 </div>
             </div>
             <!-- Fin mostrar categorias -->
-        </div>
+        </div> --}}
         <div class="flex items-center justify-center px-4 sm:px-0 mb-4">
             <x-secondary-button x-on:click="$dispatch('close-modal', 'mostrar-categorias')" class="w-full sm:w-auto justify-center">
                 {{ __('Close') }}
@@ -103,7 +108,7 @@
             Swal.fire({
                 title: "{{__('Edit :name', ['name' => 'Categoría'])}}",
                 input: "text",
-                inputValue: categoria['categoria'],
+                inputValue: categoria['categoria_edit'],
                 inputAttributes: {
                     autocapitalize: "off"
                 },
@@ -125,7 +130,7 @@
                 if (result.isConfirmed) {
                     const newCategory = result.value;
 
-                    Livewire.dispatch('editarCategoria', [categoria['id'], newCategory]);
+                    Livewire.dispatch('editarCategoria', [categoria['id_edit'], newCategory]);
                     Livewire.dispatch('mensaje', [{
                                                     'icon': 'success',
                                                     'title': 'Guardado!',
@@ -137,7 +142,7 @@
 
         Livewire.on('Eliminar', (categoria) => {
             Swal.fire({
-                title: '¿Está seguro de eliminar '+categoria['categoria']+'?',
+                title: '¿Está seguro de eliminar '+categoria['categoria_delete']+'?',
                 text: "{{__('You won\'t be able to revert this!')}}",
                 icon: 'warning',
                 showCancelButton: true,
@@ -147,7 +152,7 @@
                 cancelButtonText: "{{__('Cancel')}}"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.dispatch('eliminarCategoria', [categoria['id']]);
+                    Livewire.dispatch('eliminarCategoria', [categoria['id_delete']]);
                     
                     Livewire.dispatch('mensaje', [{
                                                     'icon': 'success',

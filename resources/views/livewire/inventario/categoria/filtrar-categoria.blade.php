@@ -1,17 +1,15 @@
 <div class="bg-gray-600 p-4 flex flex-row justify-end">
-    <form class="w-full sm:w-1/2 sm:mb-0" wire:submit.prevent='datosAfiltrar' novalidate>
-        @csrf
+    <form class="w-full sm:w-1/2 sm:mb-0" novalidate>
+        {{-- @csrf --}}
 
         <div >
             <x-text-input
-                id="buscarCategoria"
+                id="filtrar_categoria"
                 class="block mt-1 w-full"
                 type="text"
-                wire:model="categoria"
-                x-on:input="$dispatch('filtrarEntrada')"
-                :value="old('buscarCategoria')"
+                wire:model.live.debounce.300ms="filtrar_categoria"
+                :value="old('filtrar_categoria')"
                 placeholder="Filtrar Categorías" />
-            <x-input-error :messages="$errors->get('buscarCategoria')" class="mt-2" />
         </div>
     </form>
 </div>
