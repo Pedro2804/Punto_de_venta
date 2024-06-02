@@ -23,14 +23,8 @@
         </header>
 
         <!-- Crear categoria -->
-        {{-- <livewire:inventario.categoria.nueva-categoria> --}}
+        <livewire:inventario.categoria.nueva-categoria>
         <!-- Fin crear s -->
-
-        <div class="bg-white m-4 overflow-hidden shadow-sm sm:rounded-lg p-4 text-gray-900">
-            {{-- <livewire:tablas.categoria-table /> --}}
-        </div>
-        {{--
-
         <div class="bg-white m-4 overflow-hidden shadow-sm sm:rounded-lg">
 
             <!-- Filtrar categorias -->
@@ -81,9 +75,9 @@
                 </div>
             </div>
             <!-- Fin mostrar categorias -->
-        </div> --}}
+        </div>
         <div class="flex items-center justify-center px-4 sm:px-0 mb-4">
-            <x-secondary-button x-on:click="$dispatch('close-modal', 'mostrar-categorias')" class="w-full sm:w-auto justify-center">
+            <x-secondary-button  x-on:click="$dispatch('close-modal', 'mostrar-categorias')" class="w-full sm:w-auto justify-center">
                 {{ __('Close') }}
             </x-secondary-button>
         </div>
